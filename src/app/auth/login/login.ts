@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { materialImports } from '../../material';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,8 @@ import { materialImports } from '../../material';
 })
 export class Login implements OnInit {
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
   loginForm!: FormGroup;
   loading = false;
   hidePassword = true;
@@ -42,7 +45,17 @@ export class Login implements OnInit {
     }
 
     this.loading = true;
-    console.log('Login submitted', this.loginForm.value);
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: () => {
+        this.loading = false;
+        alert('Login failed. Please check your credentials and try again.');
+      },
+    });
   }
 
   togglePassword(): void {
