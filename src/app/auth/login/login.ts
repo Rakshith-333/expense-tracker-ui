@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { materialImports } from '../../material';
 import { AuthService } from '../../core/services/auth.service';
+import { TokenService } from '../../core/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class Login implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private tokenService = inject(TokenService)
   loginForm!: FormGroup;
   loading = false;
   hidePassword = true;
@@ -47,8 +49,10 @@ export class Login implements OnInit {
     this.loading = true;
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: () => {
+      next: (response) => {
         this.loading = false;
+        this.tokenService.saveToken(response.data.token)
+        this.tokenService.saveUser(response.data.user)
         this.router.navigate(['/dashboard']);
       },
       error: () => {

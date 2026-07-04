@@ -4,10 +4,11 @@ import { Observable, tap } from 'rxjs';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse, User } from '../models/login-response.model';
 import { API } from '../constants/api.constants';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly baseUrl = API.BASE_URL;
+  private readonly baseUrl = environment.apiUrl;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -17,9 +18,7 @@ export class AuthService {
       Accept: 'application/json',
     });
 
-    return this.http.post<LoginResponse>(`${this.baseUrl}${API.AUTH.LOGIN}`, payload, { headers }).pipe(
-      tap((response) => this.storeAuth(response))
-    );
+    return this.http.post<LoginResponse>(`${this.baseUrl}${API.AUTH.LOGIN}`, payload, { headers })
   }
 
   logout(): void {
@@ -27,25 +26,25 @@ export class AuthService {
     localStorage.removeItem('authUser');
   }
 
-  getToken(): string | null {
-    return localStorage.getItem('authToken');
-  }
+//   getToken(): string | null {
+//     return localStorage.getItem('authToken');
+//   }
 
-  getUser(): User | null {
-    const user = localStorage.getItem('authUser');
-    return user ? JSON.parse(user) : null;
-  }
+//   getUser(): User | null {
+//     const user = localStorage.getItem('authUser');
+//     return user ? JSON.parse(user) : null;
+//   }
 
-  isLoggedIn(): boolean {
-    return !!this.getToken();
-  }
+//   isLoggedIn(): boolean {
+//     return !!this.getToken();
+//   }
 
-  private storeAuth(response: LoginResponse): void {
-    if (response?.success && response.data?.token) {
-      localStorage.setItem('authToken', response.data.token);
-      if (response.data.user) {
-        localStorage.setItem('authUser', JSON.stringify(response.data.user));
-      }
-    }
-  }
+//   private storeAuth(response: LoginResponse): void {
+//     if (response?.success && response.data?.token) {
+//       localStorage.setItem('authToken', response.data.token);
+//       if (response.data.user) {
+//         localStorage.setItem('authUser', JSON.stringify(response.data.user));
+//       }
+//     }
+//   }
 }
