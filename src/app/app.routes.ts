@@ -5,19 +5,20 @@ import { ForgotPassword } from './auth/forgot-password/forgot-password';
 import { Dashboard } from './components/dashboard/dashboard';
 
 import { authGuard } from './core/guards/auth.guard';
+import { guestGuard } from './core/guards/guest.guard';
 
 export const routes: Routes = [
     {
         path: '', redirectTo: 'login', pathMatch: 'full',
     },
     {
-        path: 'login', component: Login
+        path: 'login', component: Login, canActivate: [guestGuard]
     },
     {
-        path: 'register', component: Register
+        path: 'register', component: Register, canActivate: [guestGuard]
     },
     {
-        path: 'forgot-password', component: ForgotPassword
+        path: 'forgot-password', component: ForgotPassword, canActivate: [guestGuard]
     },
     {
         path: 'dashboard', component: Dashboard, canActivate: [authGuard]
