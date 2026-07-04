@@ -4,6 +4,8 @@ import { Register } from './auth/register/register';
 import { ForgotPassword } from './auth/forgot-password/forgot-password';
 import { Dashboard } from './components/dashboard/dashboard';
 
+import { authGuard } from './core/guards/auth.guard';
+
 export const routes: Routes = [
     {
         path: '', redirectTo: 'login', pathMatch: 'full',
@@ -18,6 +20,6 @@ export const routes: Routes = [
         path: 'forgot-password', component: ForgotPassword
     },
     {
-        path: 'dashboard', component: Dashboard
+        path: 'dashboard', component: Dashboard, canActivate: [authGuard]
     }
 ];
