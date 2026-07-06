@@ -156,6 +156,16 @@
   ">
   Passwords do not match
 </mat-error>
+<mat-hint
+  class="mat-success"
+  *ngIf="passwordsMatch">
+  Passwords match
+</mat-hint>
+<!-- <div
+  class="password-match"
+  *ngIf="passwordsMatch">
+  ✓ Passwords match
+</div> -->
 
       </mat-form-field>
 

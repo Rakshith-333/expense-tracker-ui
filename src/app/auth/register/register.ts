@@ -103,6 +103,14 @@ get password() {
 get confirmPassword() {
   return this.registerForm.get('confirmPassword');
 }
+get passwordsMatch(): boolean {
+  const password = this.password?.value;
+  const confirmPassword = this.confirmPassword?.value;
+
+  return !!password &&
+         !!confirmPassword &&
+         password === confirmPassword;
+}
 
 togglePassword(): void {
   this.hidePassword = !this.hidePassword;
@@ -111,6 +119,7 @@ togglePassword(): void {
 toggleConfirmPassword(): void {
   this.hideConfirmPassword = !this.hideConfirmPassword;
 }
+
 
 onSubmit(): void {
 
