@@ -858,6 +858,65 @@ color:#111827;
 
 }
 
+/*==================================
+Recent Expenses Responsive
+==================================*/
+
+@media (max-width: 768px) {
+
+  .recent-card {
+    margin: 16px;
+    padding: 16px;
+  }
+
+  .recent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .recent-header h2 {
+    font-size: 20px;
+  }
+
+  .expense-item {
+    padding: 14px 0;
+  }
+
+  .expense-left {
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .expense-icon {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .expense-left h4 {
+    font-size: 15px;
+  }
+
+  .expense-left small {
+    font-size: 12px;
+  }
+
+  .expense-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .expense-right strong {
+    font-size: 15px;
+  }
+
+  .expense-date {
+    font-size: 12px;
+  }
+
+}
 
 /*=====================================
 Expense Trend
