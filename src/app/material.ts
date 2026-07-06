@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbar } from '@angular/material/toolbar';
 
 export const materialImports = [
   MatButtonModule,
@@ -13,5 +14,6 @@ export const materialImports = [
   MatIconModule,
   MatInputModule,
   MatProgressSpinnerModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatToolbar
 ];

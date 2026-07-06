@@ -1,1 +1,133 @@
-<button mat-menu-item (click)="logout()">Logout</button>
+<div class="dashboard-container">
+
+  <!-- Mobile Overlay -->
+  <div
+    class="overlay"
+    *ngIf="sidebarOpen"
+    (click)="toggleSidebar()">
+  </div>
+
+  <!-- Sidebar -->
+
+  <aside
+    class="sidebar"
+    [class.mobile-open]="sidebarOpen">
+
+    <div class="logo">
+
+      <mat-icon color="primary">
+        account_balance_wallet
+      </mat-icon>
+
+      <div>
+
+        <h2>Daily Expense</h2>
+
+        <span>Tracker</span>
+
+      </div>
+
+    </div>
+
+    <nav>
+
+      <a routerLink="/dashboard" class="active">
+
+        <mat-icon>dashboard</mat-icon>
+
+        Dashboard
+
+      </a>
+
+      <a>
+
+        <mat-icon>receipt_long</mat-icon>
+
+        Expenses
+
+      </a>
+
+      <a>
+
+        <mat-icon>add_circle</mat-icon>
+
+        Add Expense
+
+      </a>
+
+      <a>
+
+        <mat-icon>category</mat-icon>
+
+        Categories
+
+      </a>
+
+      <a>
+
+        <mat-icon>analytics</mat-icon>
+
+        Reports
+
+      </a>
+
+      <a>
+
+        <mat-icon>settings</mat-icon>
+
+        Settings
+
+      </a>
+
+    </nav>
+
+  </aside>
+
+  <!-- Main -->
+
+  <main class="content">
+
+    <!-- Toolbar -->
+
+    <mat-toolbar>
+
+      <button
+        mat-icon-button
+        class="menu-btn"
+        (click)="toggleSidebar()">
+
+        <mat-icon>menu</mat-icon>
+
+      </button>
+
+      <h2>Dashboard</h2>
+
+      <span class="spacer"></span>
+
+      <button mat-icon-button>
+
+        <mat-icon>notifications_none</mat-icon>
+
+      </button>
+
+    </mat-toolbar>
+
+    <!-- Body -->
+
+    <section class="dashboard-body">
+
+      <h1>
+        Good Morning, Manu 👋
+      </h1>
+
+      <p>
+        Here's what's happening with your expenses
+      </p>
+
+      <!-- Cards start next step -->
+
+    </section>
+
+  </main>
+
+</div>
