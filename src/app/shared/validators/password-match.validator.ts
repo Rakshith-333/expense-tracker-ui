@@ -10,14 +10,35 @@ export const passwordMatchValidator: ValidatorFn =
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
 
-  if (!password || !confirmPassword) return null;
+  if (!password || !confirmPassword) {
+    return null;
+  }
 
-  const passwordValue = password.value;
-  const confirmPasswordValue = confirmPassword.value;
+  if (!confirmPassword.value) {
+    confirmPassword.setErrors(null);
+    return null;
+  }
 
-  if (!confirmPasswordValue) return null;
+  if (password.value !== confirmPassword.value) {
+    confirmPassword.setErrors({
+      ...(confirmPassword.errors || {}),
+      passwordMismatch: true
+    });
 
-  return passwordValue === confirmPasswordValue
-    ? null
-    : { passwordMismatch: true };
+    return { passwordMismatch: true };
+  }
+
+  // Remove only passwordMismatch error
+  if (confirmPassword.hasError('passwordMismatch')) {
+
+    const errors = { ...(confirmPassword.errors || {}) };
+
+    delete errors['passwordMismatch'];
+
+    confirmPassword.setErrors(
+      Object.keys(errors).length ? errors : null
+    );
+  }
+
+  return null;
 };

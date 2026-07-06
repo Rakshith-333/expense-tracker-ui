@@ -82,9 +82,9 @@ initializeForm(): void {
       validators: passwordMatchValidator
     }
   );
-  this.registerForm.valueChanges.subscribe(() => {
-  this.registerForm.updateValueAndValidity({ onlySelf: false, emitEvent: false });
-});
+  // this.registerForm.valueChanges.subscribe(() => {
+  // this.registerForm.updateValueAndValidity({ onlySelf: false, emitEvent: false });
+  // });
 
 }
 
