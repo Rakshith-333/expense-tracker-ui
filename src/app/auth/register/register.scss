@@ -372,3 +372,37 @@ input.ng-invalid.ng-touched {
   color: #2e7d32 !important;
   font-weight: 500;
 }
+.strength-bar {
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.strength-bar .fill {
+  height: 100%;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.password-rules {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.password-rules p {
+  margin: 2px 0;
+  color: #9ca3af;
+}
+
+.password-rules p.valid {
+  color: #2e7d32;
+  font-weight: 500;
+}
+.strength-label {
+  font-size: 12px;
+  margin: 6px 0;
+  font-weight: 500;
+}
+.hint{
+  color: #f44336;
+}

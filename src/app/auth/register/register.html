@@ -119,6 +119,46 @@
         </mat-error>
 
       </mat-form-field>
+      <!-- Strength Label -->
+<div class="strength-label" *ngIf="password?.value">
+  Password Strength:
+  <span [style.color]="passwordStrengthColor">
+    {{ passwordStrengthLabel }}
+  </span>
+</div>
+
+<!-- Strength Bar -->
+<div class="strength-bar" *ngIf="password?.value">
+  <div
+    class="fill"
+    [style.width.%]="passwordStrengthScore"
+    [style.background]="passwordStrengthColor">
+  </div>
+</div>
+<div class="password-rules" *ngIf="password?.value && passwordStrengthScore < 100">
+
+  <p [class.valid]="passwordErrors?.hasMinLength">
+    ✔ Minimum 8 characters
+  </p>
+
+  <p [class.valid]="passwordErrors?.hasUpper">
+    ✔ At least 1 uppercase letter
+  </p>
+
+  <p [class.valid]="passwordErrors?.hasLower">
+    ✔ At least 1 lowercase letter
+  </p>
+
+  <p [class.valid]="passwordErrors?.hasNumber">
+    ✔ At least 1 number
+  </p>
+
+  <p [class.valid]="passwordErrors?.hasSpecial">
+    ✔ At least 1 special character
+    <span class="hint">(@$!%*?&)</span>
+  </p>
+
+</div>
 
       <!-- Confirm Password -->
 

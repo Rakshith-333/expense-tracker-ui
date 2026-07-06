@@ -17,6 +17,7 @@ import { materialImports } from '../../material';
 import { AuthService } from '../../core/services/auth.service';
 import { RegisterRequest } from '../../core/models/register-request.model';
 import { passwordMatchValidator } from '../../shared/validators/password-match.validator';
+import { strongPasswordValidator } from '../../shared/validators/password.validator';
 
 
 @Component({
@@ -68,7 +69,8 @@ initializeForm(): void {
         '',
         [
           Validators.required,
-          Validators.minLength(8)
+          Validators.minLength(8),
+          strongPasswordValidator
         ]
       ],
 
@@ -110,6 +112,40 @@ get passwordsMatch(): boolean {
   return !!password &&
          !!confirmPassword &&
          password === confirmPassword;
+}
+get passwordErrors() {
+  return this.password?.errors?.['passwordStrength'];
+}
+get passwordStrengthScore(): number {
+  const err = this.password?.errors?.['passwordStrength'];
+  if (!err) return 100;
+
+  let score = 0;
+  if (err.hasUpper) score += 20;
+  if (err.hasLower) score += 20;
+  if (err.hasNumber) score += 20;
+  if (err.hasSpecial) score += 20;
+  if (err.hasMinLength) score += 20;
+
+  return score;
+}
+get passwordStrengthLabel(): string {
+  const score = this.passwordStrengthScore;
+
+  if (!this.password?.value) return '';
+
+  if (score < 40) return 'Weak';
+  if (score < 80) return 'Medium';
+  return 'Strong';
+}
+get passwordStrengthColor(): string {
+  const score = this.passwordStrengthScore;
+
+  if (!this.password?.value) return '';
+
+  if (score < 40) return '#ef4444'; // red
+  if (score < 80) return '#f59e0b'; // orange
+  return '#22c55e'; // green
 }
 
 togglePassword(): void {
