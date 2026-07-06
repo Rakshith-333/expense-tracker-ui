@@ -3,12 +3,15 @@ import {
   DoughnutController,
   ArcElement,
   Tooltip,
-  Legend
+  Legend,
+  registerables
 } from 'chart.js';
+
 
 Chart.register(
   DoughnutController,
   ArcElement,
   Tooltip,
-  Legend
+  Legend,
+  ...registerables
 );

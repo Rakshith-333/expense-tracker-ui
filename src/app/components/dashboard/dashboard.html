@@ -241,11 +241,167 @@
     </div>
 
 </section>
+<!-- ========================= -->
+<!-- Recent Expenses -->
+<!-- ========================= -->
+
+<section class="recent-card">
+
+    <div class="recent-header">
+
+        <h2>Recent Expenses</h2>
+
+        <button
+            mat-button
+            color="primary">
+
+            View All
+
+        </button>
+
+    </div>
+
+    <div
+        class="expense-item"
+        *ngFor="let expense of recentExpenses">
+
+        <div class="expense-left">
+
+            <div
+                class="expense-icon"
+                [style.background]="expense.color">
+
+                <mat-icon>
+
+                    {{expense.icon}}
+
+                </mat-icon>
+
+            </div>
+
+            <div>
+
+                <h4>
+
+                    {{expense.category}}
+
+                </h4>
+
+                <small>
+
+                    {{expense.description}}
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="expense-right">
+
+            <span class="expense-date">
+
+                {{expense.date}}
+
+            </span>
+
+            <strong>
+
+                ₹{{expense.amount}}
+
+            </strong>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ========================= -->
+<!-- Expense Trend -->
+<!-- ========================= -->
+
+<section class="trend-card">
+
+    <div class="trend-header">
+
+        <h2>Expense Trend</h2>
+
+        <mat-form-field
+            appearance="outline"
+            class="trend-filter">
+
+            <mat-select [(value)]="selectedTrend">
+
+                <mat-option value="today">Today</mat-option>
+                <mat-option value="week">This Week</mat-option>
+                <mat-option value="month">This Month</mat-option>
+                <mat-option value="year">This Year</mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+    </div>
+
+    <div class="chart-wrapper">
+
+        <canvas
+            baseChart
+            [data]="lineChartData"
+            [options]="lineChartOptions"
+            type="line">
+        </canvas>
+
+    </div>
+
+</section>
+
+<!-- ========================= -->
+<!-- Top Spending Categories -->
+<!-- ========================= -->
+
+<section class="top-category-card">
+
+    <div class="section-header">
+
+        <h2>Top Spending Categories</h2>
+
+    </div>
+
+    <div
+        class="category-row"
+        *ngFor="let category of topCategories">
+
+        <div class="category-left">
+
+            <h4>{{ category.name }}</h4>
+
+            <span>₹{{ category.amount }}</span>
+
+        </div>
+
+        <div
+            class="progress-circle"
+            [style.--progress]="category.percentage"
+            [style.--progress-color]="category.color">
+
+            <div class="progress-inner">
+
+                {{ category.percentage }}%
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
 
 
     <!-- Toolbar -->
 
-    <mat-toolbar>
+    <!-- <mat-toolbar>
 
       <button
         mat-icon-button
@@ -266,11 +422,11 @@
 
       </button>
 
-    </mat-toolbar>
+    </mat-toolbar> -->
 
     <!-- Body -->
 
-    <section class="dashboard-body">
+    <!-- <section class="dashboard-body">
 
       <h1>
         Good Morning, Manu 👋
@@ -280,9 +436,9 @@
         Here's what's happening with your expenses
       </p>
 
-      <!-- Cards start next step -->
+      Cards start next step
 
-    </section>
+    </section> -->
 
   </main>
 

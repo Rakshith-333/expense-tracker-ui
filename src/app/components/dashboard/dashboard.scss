@@ -721,3 +721,382 @@ max-width:240px;
 }
 
 }
+
+/*==================================
+Recent Expenses
+==================================*/
+
+.recent-card{
+
+background:#ffffff;
+
+margin:24px 30px;
+
+padding:24px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.recent-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.recent-header h2{
+
+margin:0;
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+.expense-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 0;
+
+border-bottom:1px solid #ececec;
+
+}
+
+.expense-item:last-child{
+
+border-bottom:none;
+
+}
+
+.expense-left{
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+}
+
+.expense-icon{
+
+width:48px;
+
+height:48px;
+
+border-radius:14px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+.expense-icon mat-icon{
+
+color:#fff;
+
+}
+
+.expense-left h4{
+
+margin:0;
+
+font-size:16px;
+
+font-weight:600;
+
+}
+
+.expense-left small{
+
+color:#6b7280;
+
+}
+
+.expense-right{
+
+text-align:right;
+
+display:flex;
+
+flex-direction:column;
+
+gap:4px;
+
+}
+
+.expense-date{
+
+font-size:13px;
+
+color:#6b7280;
+
+}
+
+.expense-right strong{
+
+font-size:17px;
+
+color:#111827;
+
+}
+
+
+/*=====================================
+Expense Trend
+======================================*/
+
+.trend-card{
+
+background:#fff;
+
+margin:24px 30px;
+
+padding:24px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+
+.trend-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.trend-header h2{
+
+margin:0;
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+.trend-filter{
+
+width:160px;
+
+}
+
+.chart-wrapper{
+
+height:350px;
+
+}
+
+@media(max-width:768px){
+
+.trend-card{
+
+margin:16px;
+
+padding:16px;
+
+}
+
+.trend-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.trend-filter{
+
+width:120px;
+
+}
+
+.chart-wrapper{
+
+height:260px;
+
+}
+
+}
+/*==========================================
+Top Spending Categories
+==========================================*/
+
+.top-category-card{
+    background:#fff;
+    margin:24px 30px;
+    padding:24px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+
+.section-header{
+    margin-bottom:24px;
+}
+
+.section-header h2{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    color:#1f2937;
+}
+
+.category-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #ececec;
+}
+
+.category-row:last-child{
+    border-bottom:none;
+}
+
+.category-left h4{
+    margin:0;
+    font-size:17px;
+    font-weight:600;
+    color:#111827;
+}
+
+.category-left span{
+    display:block;
+    margin-top:6px;
+    color:#6b7280;
+    font-size:14px;
+}
+
+/*==========================
+Progress Circle
+==========================*/
+
+.progress-circle{
+
+    --size:80px;
+
+    width:var(--size);
+
+    height:var(--size);
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:
+        conic-gradient(
+            var(--progress-color) calc(var(--progress) * 1%),
+            #E5E7EB 0
+        );
+
+    position:relative;
+
+}
+
+.progress-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+}
+
+.progress-inner{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#111827;
+
+}
+
+/*==========================
+Mobile
+==========================*/
+
+@media(max-width:768px){
+
+.top-category-card{
+
+margin:16px;
+
+padding:16px;
+
+}
+
+.category-row{
+
+padding:16px 0;
+
+}
+
+.progress-circle{
+
+--size:70px;
+
+}
+
+.progress-circle::before{
+
+width:56px;
+
+height:56px;
+
+}
+
+.category-left h4{
+
+font-size:15px;
+
+}
+
+.category-left span{
+
+font-size:13px;
+
+}
+
+}

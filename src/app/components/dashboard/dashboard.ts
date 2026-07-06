@@ -5,7 +5,7 @@ import { materialImports } from '../../material';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartType } from 'chart.js';
+import { ChartConfiguration, ChartType, ChartOptions } from 'chart.js'; 
 
 
 
@@ -55,7 +55,103 @@ export class Dashboard implements OnInit {
     cardClass: 'orange-card'
   }
 ];
+recentExpenses = [
+  {
+    category: 'Food',
+    description: 'Lunch',
+    amount: 350,
+    date: 'Today',
+    icon: 'restaurant',
+    color: '#7C3AED'
+  },
+  {
+    category: 'Transport',
+    description: 'Fuel',
+    amount: 1200,
+    date: 'Yesterday',
+    icon: 'directions_car',
+    color: '#3B82F6'
+  },
+  {
+    category: 'Shopping',
+    description: 'Clothes',
+    amount: 850,
+    date: '02 Jul',
+    icon: 'shopping_bag',
+    color: '#F97316'
+  },
+  {
+    category: 'Health',
+    description: 'Medicine',
+    amount: 450,
+    date: '01 Jul',
+    icon: 'medical_services',
+    color: '#22C55E'
+  }
+];
+
+topCategories = [
+  {
+    id: 1,
+    name: 'Food',
+    amount: 8450,
+    percentage: 48,
+    color: '#7C4DFF'
+  },
+  {
+    id: 2,
+    name: 'Shopping',
+    amount: 5300,
+    percentage: 30,
+    color: '#2196F3'
+  },
+  {
+    id: 3,
+    name: 'Transport',
+    amount: 2100,
+    percentage: 12,
+    color: '#FF9800'
+  },
+  {
+    id: 4,
+    name: 'Health',
+    amount: 1500,
+    percentage: 10,
+    color: '#4CAF50'
+  }
+];
+
+
+
+
+
 selectedPeriod = 'month';
+selectedTrend = 'month';
+
+lineChartData: ChartConfiguration<'line'>['data'] = {
+  labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+  datasets: [
+    {
+      label: 'Expenses',
+      data: [3500, 5200, 4100, 6800],
+      borderColor: '#7C3AED',
+      backgroundColor: 'rgba(124,58,237,.15)',
+      fill: true,
+      tension: 0.4
+    }
+  ]
+};
+
+lineChartOptions: ChartOptions<'line'> = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: false
+    }
+  }
+};
+
 
 pieChartType: ChartType = 'doughnut';
 
