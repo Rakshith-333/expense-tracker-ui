@@ -1,0 +1,362 @@
+/* ===========================
+   HOST
+=========================== */
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* ===========================
+   COLORS
+=========================== */
+
+:host {
+  --primary: #6c3cf0;
+  --primary-light: #7c4dff;
+  --background: #f5f7fb;
+  --text: #1f2937;
+  --secondary: #6b7280;
+}
+
+/* ===========================
+   PAGE
+=========================== */
+
+.login-container {
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: 100%;
+  background: #f5f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===========================
+   TOP RIGHT BLOB
+=========================== */
+
+.top-blob {
+  position: absolute;
+  top: -80px;
+  right: -60px;
+
+  width: 230px;
+  height: 230px;
+
+  background: rgba(108, 60, 240, 0.08);
+
+  border-radius: 50%;
+}
+
+/* ===========================
+   BOTTOM LEFT DOTS
+=========================== */
+
+.bottom-dots {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+
+  width: 110px;
+  height: 110px;
+
+  background-image: radial-gradient(#d8c8ff 2px, transparent 2px);
+  background-size: 14px 14px;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.login-card {
+  width: min(100%, 400px);
+  max-width: 400px;
+//   max-height: calc(100dvh - 24px);
+max-height: none;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 22px;
+  background: white;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .08);
+  position: relative;
+  z-index: 10;
+  margin: auto;
+}
+
+/* ===========================
+   LOGO
+=========================== */
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.logo-icon {
+  color: var(--primary);
+  font-size: 36px !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.app-title {
+  margin: 8px 0 4px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.app-title span {
+  color: var(--primary);
+}
+
+.subtitle {
+  color: var(--secondary);
+
+  font-size: 15px;
+
+  margin: 0;
+}
+
+/* ===========================
+   HEADING
+=========================== */
+
+.heading {
+  margin: 14px 0 12px;
+}
+
+.heading h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.heading p {
+  margin-top: 4px;
+  color: var(--secondary);
+  font-size: 14px;
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.password-toggle {
+  margin-right: 2px;
+}
+
+.password-toggle .mat-icon {
+  font-size: 20px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Rounded Material Fields */
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: 14px !important;
+}
+
+/* ===========================
+   FORGOT PASSWORD
+=========================== */
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 12px;
+}
+
+.forgot-password a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+/* ===========================
+   LOGIN BUTTON
+=========================== */
+
+.login-btn {
+  width: 100%;
+  height: 46px;
+
+  border-radius: 12px !important;
+
+  background: linear-gradient(
+      90deg,
+      #6c3cf0,
+      #7c4dff
+  ) !important;
+
+  color: white !important;
+
+  font-size: 17px;
+
+  font-weight: 600;
+}
+
+.login-btn .mdc-button__label {
+  color: white !important;
+}
+
+/* ===========================
+   DIVIDER
+=========================== */
+
+.divider {
+  display: flex;
+  align-items: center;
+
+  margin: 20px 0;
+
+  color: gray;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+
+  flex: 1;
+
+  border-bottom: 1px solid #ddd;
+}
+
+.divider span {
+  margin: 0 14px;
+}
+
+/* ===========================
+   GOOGLE BUTTON
+=========================== */
+
+.google-btn {
+  width: 100%;
+  height: 46px;
+  border-radius: 12px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  padding: 0 16px;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.google-btn .mdc-button__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.google-btn .google-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-bottom: -3px;
+}
+
+.google-btn span {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.google-continue {
+    padding-left: 5px;
+}
+
+/* ===========================
+   REGISTER
+=========================== */
+
+.register-link {
+  margin-top: 12px;
+
+  text-align: center;
+
+  color: var(--secondary);
+}
+
+.register-link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 600px) {
+
+  .login-card {
+
+    max-width: 100%;
+
+    padding: 22px;
+
+    border-radius: 20px;
+  }
+
+  .app-title {
+    font-size: 28px;
+  }
+
+  .heading h2 {
+    font-size: 28px;
+  }
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (min-width: 768px) {
+
+  .login-card {
+    max-width: 450px;
+  }
+
+}
+
+/* ===========================
+   DESKTOP
+=========================== */
+
+@media (min-width: 1200px) {
+
+  .login-card {
+    max-width: 470px;
+  }
+
+}
+input.ng-invalid.ng-touched {
+  border-color: #f44336;
+}

@@ -5,6 +5,8 @@ import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse, User } from '../models/login-response.model';
 import { API } from '../constants/api.constants';
 import { environment } from '../../../environments/environment';
+import { RegisterRequest } from '../models/register-request.model';
+import { RegisterResponse } from '../models/register-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -21,10 +23,19 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.baseUrl}${API.AUTH.LOGIN}`, payload, { headers })
   }
 
-  logout(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('authUser');
+   register(payload: RegisterRequest): Observable<RegisterResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+
+    return this.http.post<RegisterResponse>(`${this.baseUrl}${API.AUTH.REGISTER}`, payload, { headers })
   }
+
+//   logout(): void {
+//     localStorage.removeItem('authToken');
+//     localStorage.removeItem('authUser');
+//   }
 
 //   getToken(): string | null {
 //     return localStorage.getItem('authToken');

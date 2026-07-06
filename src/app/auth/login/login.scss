@@ -25,17 +25,35 @@
 
 .login-container {
   min-height: 100dvh;
-  min-height: 100svh;
   width: 100%;
+
   background: #f5f7fb;
+
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 12px;
+
+  padding: 20px 12px;
+
   box-sizing: border-box;
+
   position: relative;
-  overflow: hidden;
+
+  overflow-y: auto; /* IMPORTANT */
 }
+
+// .login-container {
+//   min-height: 100dvh;
+//   min-height: 100svh;
+//   width: 100%;
+//   background: #f5f7fb;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 12px;
+//   box-sizing: border-box;
+//   position: relative;
+//   overflow: hidden;
+// }
 
 /* ===========================
    TOP RIGHT BLOB
@@ -77,7 +95,8 @@
 .login-card {
   width: min(100%, 400px);
   max-width: 400px;
-  max-height: calc(100dvh - 24px);
+//   max-height: calc(100dvh - 24px);
+max-height: none;
   overflow: hidden;
   border-radius: 24px;
   padding: 22px;
@@ -356,420 +375,3 @@ mat-form-field {
   }
 
 }
-
-
-// /* ==========================
-//    Color Variables
-// ========================== */
-
-// :host {
-//   --primary: #6c3cf0;
-//   --primary-light: #7c4dff;
-//   --background: #f5f7fb;
-//   --card-bg: #ffffff;
-//   --text: #111827;
-//   --secondary: #6b7280;
-//   --border: #e5e7eb;
-// }
-
-// /* ==========================
-//    Page
-// ========================== */
-
-// .login-container {
-//   min-height: 100vh;
-//   background: var(--background);
-
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-
-//   padding: 20px;
-//   position: relative;
-//   overflow: hidden;
-// }
-
-// /* ==========================
-//  Decorative Top Blob
-// ========================== */
-
-// .top-blob {
-
-//   position: absolute;
-
-//   top: -60px;
-
-//   right: -50px;
-
-//   width: 220px;
-
-//   height: 220px;
-
-//   background: rgba(108, 60, 240, .08);
-
-//   border-radius: 45% 55% 50% 60%;
-
-// }
-
-// /* ==========================
-//  Bottom Dots
-// ========================== */
-
-// .bottom-dots {
-
-//   position: absolute;
-
-//   left: 20px;
-
-//   bottom: 20px;
-
-//   width: 100px;
-
-//   height: 100px;
-
-//   background-image:
-//       radial-gradient(#d5c8ff 2px, transparent 2px);
-
-//   background-size: 14px 14px;
-
-// }
-
-// /* ==========================
-//  Card
-// ========================== */
-
-// .login-card {
-
-//   width: 100%;
-
-//   max-width: 430px;
-
-//   border-radius: 24px;
-
-//   padding: 35px 28px;
-
-//   box-shadow:
-//       0 15px 40px rgba(108,60,240,.12);
-
-//   background: white;
-
-//   position: relative;
-
-//   z-index: 2;
-
-// }
-
-// /* ==========================
-//  Logo
-// ========================== */
-
-// .logo-section {
-
-//   text-align: center;
-
-//   margin-bottom: 35px;
-
-// }
-
-// .logo-icon{
-
-//   font-size:58px;
-
-//   width:58px;
-
-//   height:58px;
-
-//   color:var(--primary);
-
-// }
-
-// .app-title{
-
-//   margin-top:15px;
-
-//   font-size:32px;
-
-//   font-weight:700;
-
-//   color:var(--text);
-
-// }
-
-// .app-title span{
-
-//   color:var(--primary);
-
-// }
-
-// .subtitle{
-
-//   color:var(--secondary);
-
-//   margin-top:8px;
-
-// }
-
-// /* ==========================
-//  Heading
-// ========================== */
-
-// .heading{
-
-//   margin-bottom:25px;
-
-// }
-
-// .heading h2{
-
-//   font-size:32px;
-
-//   font-weight:700;
-
-//   margin-bottom:6px;
-
-// }
-
-// .heading p{
-
-//   color:var(--secondary);
-
-// }
-
-// /* ==========================
-//  Form
-// ========================== */
-
-// .login-form{
-
-//   display:flex;
-
-//   flex-direction:column;
-
-// }
-
-// mat-form-field{
-
-//   width:100%;
-
-//   margin-bottom:18px;
-
-// }
-
-// /* Rounded Angular Material */
-
-// ::ng-deep .mat-mdc-text-field-wrapper{
-
-//   border-radius:14px !important;
-
-// }
-
-// /* ==========================
-//  Forgot Password
-// ========================== */
-
-// .forgot-password{
-
-//   display:flex;
-
-//   justify-content:flex-end;
-
-//   margin-bottom:24px;
-
-// }
-
-// .forgot-password a{
-
-//   color:var(--primary);
-
-//   text-decoration:none;
-
-//   font-weight:600;
-
-// }
-
-// .forgot-password a:hover{
-
-//   text-decoration:underline;
-
-// }
-
-// /* ==========================
-//  Login Button
-// ========================== */
-
-// .login-btn{
-
-//   height:52px;
-
-//   border-radius:12px;
-
-//   color:white !important;
-
-//   font-size:17px;
-
-//   font-weight:600;
-
-//   background:
-//       linear-gradient(
-//           90deg,
-//           var(--primary),
-//           var(--primary-light)
-//       ) !important;
-
-// }
-
-// /* ==========================
-//  Divider
-// ========================== */
-
-// .divider{
-
-//   display:flex;
-
-//   align-items:center;
-
-//   text-align:center;
-
-//   margin:30px 0;
-
-// }
-
-// .divider::before,
-
-// .divider::after{
-
-//   content:'';
-
-//   flex:1;
-
-//   border-bottom:1px solid #ddd;
-
-// }
-
-// .divider span{
-
-//   margin:0 15px;
-
-//   color:gray;
-
-// }
-
-// /* ==========================
-//  Google Button
-// ========================== */
-
-// .google-btn{
-
-//   height:50px;
-
-//   border-radius:12px;
-
-//   display:flex;
-
-//   align-items:center;
-
-//   justify-content:center;
-
-//   gap:12px;
-
-//   font-weight:600;
-
-// }
-
-// .google-btn img{
-
-//   width:22px;
-
-//   height:22px;
-
-// }
-
-// /* ==========================
-//  Footer
-// ========================== */
-
-// .register-link{
-
-//   text-align:center;
-
-//   margin-top:30px;
-
-//   color:var(--secondary);
-
-// }
-
-// .register-link a{
-
-//   color:var(--primary);
-
-//   text-decoration:none;
-
-//   font-weight:700;
-
-//   margin-left:6px;
-
-// }
-
-// /* ==========================
-//  Hover Effects
-// ========================== */
-
-// .login-card{
-
-//   transition:.3s;
-
-// }
-
-// .login-card:hover{
-
-//   transform:translateY(-2px);
-
-// }
-
-// /* ==========================
-//  Responsive
-// ========================== */
-
-// @media(max-width:599px){
-
-// .login-card{
-
-// padding:24px 18px;
-
-// border-radius:20px;
-
-// }
-
-// .app-title{
-
-// font-size:26px;
-
-// }
-
-// .heading h2{
-
-// font-size:28px;
-
-// }
-
-// }
-
-// @media(min-width:768px){
-
-// .login-card{
-
-// max-width:460px;
-
-// }
-
-// }
-
-// @media(min-width:1200px){
-
-// .login-card{
-
-// max-width:480px;
-
-// }
-
-// }

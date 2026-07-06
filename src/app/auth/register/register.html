@@ -1,1 +1,221 @@
-<p>register works!</p>
+<div class="login-container">
+
+  <div class="top-blob"></div>
+
+  <div class="bottom-dots"></div>
+
+  <mat-card class="login-card">
+
+    <!-- Logo -->
+
+    <div class="logo-section">
+
+      <mat-icon class="logo-icon">
+        account_balance_wallet
+      </mat-icon>
+
+      <h1 class="app-title">
+        Daily Expense <span>Tracker</span>
+      </h1>
+
+      <p class="subtitle">
+        Track your expenses. Save your money.
+      </p>
+
+    </div>
+
+    <!-- Heading -->
+
+    <div class="heading">
+
+      <h2>Create Account</h2>
+
+      <p>Create your account to continue</p>
+
+    </div>
+
+    <!-- Form -->
+
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="login-form">
+
+      <!-- Name -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Full Name</mat-label>
+
+        <mat-icon matPrefix>person</mat-icon>
+
+        <input
+          matInput
+          type="text"
+          formControlName="name"
+          placeholder="Enter your full name">
+
+        <mat-error *ngIf="name?.hasError('required')">
+          Full name is required
+        </mat-error>
+
+      </mat-form-field>
+
+      <!-- Email -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Email Address</mat-label>
+
+        <mat-icon matPrefix>mail</mat-icon>
+
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email">
+
+        <mat-error *ngIf="email?.hasError('required')">
+          Email is required
+        </mat-error>
+
+        <mat-error *ngIf="email?.hasError('email')">
+          Enter a valid email
+        </mat-error>
+
+      </mat-form-field>
+
+      <!-- Password -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Password</mat-label>
+
+        <mat-icon matPrefix>lock</mat-icon>
+
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password">
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="togglePassword()">
+
+          <mat-icon>
+            {{ hidePassword ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+
+        </button>
+
+        <mat-error *ngIf="password?.hasError('required')">
+          Password is required
+        </mat-error>
+
+        <mat-error *ngIf="password?.hasError('minlength')">
+          Minimum 8 characters
+        </mat-error>
+
+      </mat-form-field>
+
+      <!-- Confirm Password -->
+
+      <mat-form-field appearance="outline">
+
+        <mat-label>Confirm Password</mat-label>
+
+        <mat-icon matPrefix>lock_reset</mat-icon>
+
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          formControlName="confirmPassword">
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="toggleConfirmPassword()">
+
+          <mat-icon>
+            {{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+
+        </button>
+
+        <mat-error *ngIf="confirmPassword?.hasError('required')">
+          Confirm Password is required
+        </mat-error>
+
+        <mat-error
+  *ngIf="
+    confirmPassword?.value &&
+    registerForm.hasError('passwordMismatch')
+  "
+>
+  Passwords do not match
+</mat-error>
+
+      </mat-form-field>
+
+      <!-- Register Button -->
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="login-btn"
+        type="submit"
+        [disabled]="registerForm.invalid || loading">
+
+        <mat-spinner
+          *ngIf="loading"
+          diameter="22">
+        </mat-spinner>
+
+        <span *ngIf="!loading">
+          Create Account
+        </span>
+
+      </button>
+
+      <!-- Divider -->
+
+      <!-- <div class="divider">
+        <span>OR</span>
+      </div> -->
+
+      <!-- Google -->
+
+      <!-- <button
+        mat-stroked-button
+        type="button"
+        class="google-btn"
+        (click)="registerWithGoogle()">
+
+        <img
+          src="assets/images/google.png"
+          alt="Google">
+
+        Continue with Google
+
+      </button> -->
+
+    </form>
+
+    <!-- Footer -->
+
+    <div class="register-link">
+
+      Already have an account?
+
+      <a routerLink="/login">
+        Login
+      </a>
+
+    </div>
+
+  </mat-card>
+
+</div>
