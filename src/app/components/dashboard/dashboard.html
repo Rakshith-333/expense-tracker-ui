@@ -87,6 +87,162 @@
 
   <main class="content">
 
+    <header class="dashboard-header">
+
+    <div class="header-left">
+
+        <button
+            mat-icon-button
+            class="menu-btn"
+            (click)="toggleSidebar()">
+
+            <mat-icon>menu</mat-icon>
+
+        </button>
+
+        <h1>Dashboard</h1>
+
+    </div>
+
+    <div class="header-right">
+
+        <button mat-icon-button>
+
+            <mat-icon>notifications_none</mat-icon>
+
+        </button>
+
+        <div class="user-info">
+
+            Good Morning, {{ userName }} 👋
+
+        </div>
+
+    </div>
+
+</header>
+<div class="overview">
+
+    <h2>Overview</h2>
+
+    <p>Here's what's happening with your expenses</p>
+
+</div>
+<section class="summary-section">
+
+    <div
+        class="summary-card"
+        *ngFor="let card of summaryCards"
+        [ngClass]="card.cardClass">
+
+        <div class="card-left">
+
+            <span class="card-title">
+                {{ card.title }}
+            </span>
+
+            <h2>
+                {{ card.amount }}
+            </h2>
+
+            <small>
+                {{ card.subtitle }}
+            </small>
+
+        </div>
+
+        <div
+            class="card-icon"
+            [ngClass]="card.iconClass">
+
+            <mat-icon>
+                {{ card.icon }}
+            </mat-icon>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="chart-card">
+
+    <div class="chart-header">
+
+        <h2>Expense by Category</h2>
+
+        <mat-form-field appearance="outline">
+
+            <mat-select [(value)]="selectedPeriod">
+
+                <mat-option value="today">Today</mat-option>
+
+                <mat-option value="week">This Week</mat-option>
+
+                <mat-option value="month">This Month</mat-option>
+
+                <mat-option value="year">This Year</mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+    </div>
+
+    <div class="chart-content">
+
+        <div class="chart">
+
+            <canvas
+                baseChart
+                [data]="pieChartData"
+                [type]="pieChartType">
+            </canvas>
+
+        </div>
+
+        <div class="category-list">
+
+            <div class="category-item">
+  <span>🍔 Food</span>
+
+  <div class="values">
+    <strong>₹8,450</strong>
+    <small>20%</small>
+  </div>
+</div>
+      <div class="category-item">
+  <span>🚗 Transport</span>
+
+  <div class="values">
+    <strong>₹8,450</strong>
+    <small>20%</small>
+  </div>
+</div>
+      <div class="category-item">
+  <span>🛍 Shopping</span>
+
+  <div class="values">
+    <strong>₹8,450</strong>
+    <small>20%</small>
+  </div>
+</div>
+      <div class="category-item">
+  <span>🏥 Health</span>
+
+  <div class="values">
+    <strong>₹8,450</strong>
+    <small>20%</small>
+  </div>
+</div>
+      
+
+        </div>
+
+    </div>
+
+</section>
+
+
     <!-- Toolbar -->
 
     <mat-toolbar>
