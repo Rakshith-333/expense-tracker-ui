@@ -53,7 +53,7 @@ export class Login implements OnInit {
         this.loading = false;
         this.tokenService.saveToken(response.data.token)
         this.tokenService.saveUser(response.data.user)
-        this.router.navigate(['/dashboard']);
+        this.router.navigateByUrl('/dashboard', { replaceUrl: true });
       },
       error: () => {
         this.loading = false;

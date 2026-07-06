@@ -128,7 +128,13 @@
     <p>Here's what's happening with your expenses</p>
 
 </div>
-<section class="summary-section">
+<div *ngIf="isLoading" class="loading-message">
+  Loading dashboard data...
+</div>
+<div *ngIf="hasError" class="error-message">
+  Unable to load dashboard. Please refresh or login again.
+</div>
+<section class="summary-section" *ngIf="!isLoading && !hasError">
 
     <div
         class="summary-card"
@@ -202,39 +208,14 @@
 
         <div class="category-list">
 
-            <div class="category-item">
-  <span>🍔 Food</span>
+            <div class="category-item" *ngFor="let category of categorySummary">
+                <span>{{ category.category }}</span>
 
-  <div class="values">
-    <strong>₹8,450</strong>
-    <small>20%</small>
-  </div>
-</div>
-      <div class="category-item">
-  <span>🚗 Transport</span>
-
-  <div class="values">
-    <strong>₹8,450</strong>
-    <small>20%</small>
-  </div>
-</div>
-      <div class="category-item">
-  <span>🛍 Shopping</span>
-
-  <div class="values">
-    <strong>₹8,450</strong>
-    <small>20%</small>
-  </div>
-</div>
-      <div class="category-item">
-  <span>🏥 Health</span>
-
-  <div class="values">
-    <strong>₹8,450</strong>
-    <small>20%</small>
-  </div>
-</div>
-      
+                <div class="values">
+                    <strong>₹{{ category.totalAmount }}</strong>
+                    <small>{{ category.percentage }}%</small>
+                </div>
+            </div>
 
         </div>
 
@@ -244,8 +225,7 @@
 <!-- ========================= -->
 <!-- Recent Expenses -->
 <!-- ========================= -->
-
-<section class="recent-card">
+<section class="recent-card" *ngIf="!isLoading && !hasError">
 
     <div class="recent-header">
 
@@ -319,8 +299,7 @@
 <!-- ========================= -->
 <!-- Expense Trend -->
 <!-- ========================= -->
-
-<section class="trend-card">
+<section class="trend-card" *ngIf="!isLoading && !hasError">
 
     <div class="trend-header">
 
@@ -359,8 +338,7 @@
 <!-- ========================= -->
 <!-- Top Spending Categories -->
 <!-- ========================= -->
-
-<section class="top-category-card">
+<section class="top-category-card" *ngIf="!isLoading && !hasError">
 
     <div class="section-header">
 

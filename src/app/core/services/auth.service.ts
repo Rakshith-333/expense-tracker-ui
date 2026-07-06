@@ -7,6 +7,7 @@ import { API } from '../constants/api.constants';
 import { environment } from '../../../environments/environment';
 import { RegisterRequest } from '../models/register-request.model';
 import { RegisterResponse } from '../models/register-response.model';
+import { DashboardResponse } from '../models/dashboard-response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -30,6 +31,25 @@ export class AuthService {
     });
 
     return this.http.post<RegisterResponse>(`${this.baseUrl}${API.AUTH.REGISTER}`, payload, { headers })
+  }
+
+   getDashboard(): Observable<DashboardResponse> {
+    const token = localStorage.getItem('token');
+    const headersConfig: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(headersConfig);
+
+    return this.http.get<DashboardResponse>(
+      `${this.baseUrl}${API.AUTH.DASHBOARD}`,
+      { headers }
+    );
   }
 
 //   logout(): void {
