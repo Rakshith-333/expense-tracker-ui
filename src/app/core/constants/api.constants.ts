@@ -4,6 +4,7 @@ export const API ={
         LOGIN: '/auth/login',
         REGISTER: '/auth/register',
         DASHBOARD: '/dashboard',
+        EXPENSES: '/expenses',
         REFRESH: '/auth/refresh-token'
     }
 }

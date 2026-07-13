@@ -1,0 +1,32 @@
+ <header class="dashboard-header">
+
+    <div class="header-left">
+
+        <button
+             mat-icon-button
+ class="menu-btn"
+ (click)="openMenu()">
+
+            <mat-icon>menu</mat-icon>
+
+        </button>
+
+        <h1>Dashboard</h1>
+
+    </div>
+
+    <div class="header-right">
+
+        <button mat-icon-button>
+
+            <mat-icon>notifications_none</mat-icon>
+
+        </button>
+
+        <div class="user-info">
+  {{ greeting }}, {{ userName }} 👋
+</div>
+
+    </div>
+
+</header>

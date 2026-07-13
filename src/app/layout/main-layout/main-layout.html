@@ -1,0 +1,19 @@
+<div class="layout-container">
+
+  <app-sidebar [sidebarOpen]="sidebarOpen"></app-sidebar>
+
+  <div class="page-area">
+    <app-header (menuClicked)="toggleSidebar()"></app-header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <div
+    class="overlay"
+    *ngIf="sidebarOpen"
+    (click)="toggleSidebar()">
+  </div>
+
+</div>

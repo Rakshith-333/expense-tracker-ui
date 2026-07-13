@@ -1,44 +1,52 @@
+html,
+body {
+  overflow-x: hidden;
+}
+
 * {
   box-sizing: border-box;
 }
-
-.dashboard-container {
-  display: flex;
-  min-height: 100vh;
-  background: #f7f8fc;
+.dashboard-page{
+  width:100%;
+  min-height:100%;
 }
+// .dashboard-container {
+//   display: flex;
+//   min-height: 100vh;
+//   background: #f7f8fc;
+// }
 
 /* =======================
 Sidebar
 ========================== */
 
-.sidebar {
+// .sidebar {
 
-  position: fixed;
+//   position: fixed;
 
-  left: -260px;
+//   left: -260px;
 
-  top: 0;
+//   top: 0;
 
-  width: 250px;
+//   width: 250px;
 
-  height: 100vh;
+//   height: 100vh;
 
-  background: white;
+//   background: white;
 
-  transition: .3s;
+//   transition: .3s;
 
-  z-index: 1000;
+//   z-index: 1000;
 
-  box-shadow: 2px 0 20px rgba(0,0,0,.08);
+//   box-shadow: 2px 0 20px rgba(0,0,0,.08);
 
-}
+// }
 
-.sidebar.mobile-open {
+// .sidebar.mobile-open {
 
-  left: 0;
+//   left: 0;
 
-}
+// }
 
 .logo {
 
@@ -118,13 +126,13 @@ nav a:hover {
 Main
 ========================== */
 
-.content {
+// .content {
 
-  flex: 1;
+//   flex: 1;
 
-  width: 100%;
+//   width: 100%;
 
-}
+// }
 
 mat-toolbar {
 
@@ -170,49 +178,49 @@ mat-toolbar {
 Overlay
 ===================== */
 
-.overlay {
+// .overlay {
 
-  position: fixed;
+//   position: fixed;
 
-  inset: 0;
+//   inset: 0;
 
-  background: rgba(0,0,0,.3);
+//   background: rgba(0,0,0,.3);
 
-  z-index: 999;
+//   z-index: 999;
 
-}
+// }
 
 /* =====================
 Desktop
 ===================== */
 
-@media (min-width:992px) {
+// @media (min-width:992px) {
 
-.sidebar {
+// .sidebar {
 
-left:0;
+// left:0;
 
-}
+// }
 
-.content{
+// .content{
 
-margin-left:250px;
+// margin-left:250px;
 
-}
+// }
 
-.menu-btn{
+// .menu-btn{
 
-display:none;
+// display:none;
 
-}
+// }
 
-.overlay{
+// .overlay{
 
-display:none;
+// display:none;
 
-}
+// }
 
-}
+// }
 /*==========================
 Dashboard Header
 ==========================*/
@@ -255,11 +263,11 @@ margin:0;
 
 }
 
-.menu-btn{
+// .menu-btn{
 
-display:none;
+// display:none;
 
-}
+// }
 
 .header-right{
 
