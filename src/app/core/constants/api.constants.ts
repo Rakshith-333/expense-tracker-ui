@@ -6,5 +6,8 @@ export const API ={
         DASHBOARD: '/dashboard',
         EXPENSES: '/expenses',
         REFRESH: '/auth/refresh-token'
+    },
+    EXPENSES: {
+        ADDEXPENSE: '/expenses'
     }
 }

@@ -8,6 +8,8 @@ import { environment } from '../../../environments/environment';
 import { RegisterRequest } from '../models/register-request.model';
 import { RegisterResponse } from '../models/register-response.model';
 import { DashboardResponse } from '../models/dashboard-response';
+import { AddExpenseRequest } from '../models/add-expense-request';
+import { AddExpenseResponse } from '../models/add-expense-response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -50,6 +52,15 @@ export class AuthService {
       `${this.baseUrl}${API.AUTH.DASHBOARD}`,
       { headers }
     );
+  }
+
+  addExpense(payload: AddExpenseRequest): Observable<AddExpenseResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+
+    return this.http.post<AddExpenseResponse>(`${this.baseUrl}${API.EXPENSES.ADDEXPENSE}`, payload, { headers })
   }
 
 //   logout(): void {

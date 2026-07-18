@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>
+  <mat-icon color="primary">check_circle</mat-icon>
+  Expense Added
+</h2>
+
+<mat-dialog-content>
+
+  Expense added successfully.
+
+  <br><br>
+
+  Do you want to add another expense?
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-stroked-button
+    (click)="no()">
+    No
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="yes()">
+    Yes
+  </button>
+
+</mat-dialog-actions>

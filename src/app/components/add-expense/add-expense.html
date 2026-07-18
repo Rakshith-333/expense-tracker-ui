@@ -1,1 +1,160 @@
-<p>add-expense works!</p>
+<div class="add-expense-page">
+
+  <!-- Page Title -->
+  <div class="page-header">
+    <h2>Add Expense</h2>
+    <p>Add your daily expense quickly and easily.</p>
+  </div>
+
+  <!-- Expense Card -->
+  <mat-card class="expense-card">
+
+    <div class="form-grid">
+
+      <!-- Amount -->
+      <div class="form-group">
+        <label>
+          Amount <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+          <span matTextPrefix>₹&nbsp;</span>
+
+          <input
+            matInput
+            type="number"
+            placeholder="Enter amount"
+            [(ngModel)]="expense.amount">
+        </mat-form-field>
+      </div>
+
+      <!-- Category -->
+      <div class="form-group">
+        <label>
+          Category <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-select
+            placeholder="Select Category"
+            [(ngModel)]="expense.category">
+
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category">
+
+              {{category}}
+
+            </mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+      </div>
+
+      <!-- Date -->
+      <div class="form-group">
+
+        <label>
+          Date <span class="required">*</span>
+        </label>
+
+        <mat-form-field appearance="outline">
+
+          <input
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="expense.date">
+
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker">
+          </mat-datepicker-toggle>
+
+          <mat-datepicker #picker></mat-datepicker>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- Payment Mode -->
+      <div class="form-group">
+
+        <label>Payment Mode</label>
+
+        <mat-form-field appearance="outline">
+
+          <mat-select
+            placeholder="Select Payment Mode"
+            [(ngModel)]="expense.paymentMode">
+
+            <mat-option
+              *ngFor="let payment of paymentModes"
+              [value]="payment">
+
+              {{payment}}
+
+            </mat-option>
+
+          </mat-select>
+
+        </mat-form-field>
+
+      </div>
+
+      <!-- Description -->
+      <div class="form-group full-width">
+
+        <label>Description</label>
+
+        <mat-form-field appearance="outline">
+
+          <textarea
+            matInput
+            rows="4"
+            maxlength="200"
+            placeholder="Enter description (Optional)"
+            [(ngModel)]="expense.description">
+          </textarea>
+
+          <mat-hint align="end">
+            {{ expense.description?.length || 0 }}/200
+          </mat-hint>
+
+        </mat-form-field>
+
+      </div>
+
+    </div>
+
+    <!-- Action Buttons -->
+
+    <div class="action-buttons">
+
+      <button
+        mat-stroked-button
+        type="button"
+        class="cancel-btn"
+        (click)="cancel()">
+
+        Cancel
+
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="save-btn"
+        type="button"
+        (click)="saveExpense()">
+
+        Save Expense
+
+      </button>
+
+    </div>
+
+  </mat-card>
+
+</div>
