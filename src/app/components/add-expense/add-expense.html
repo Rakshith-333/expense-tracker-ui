@@ -78,6 +78,80 @@
 
       </div>
 
+     <!-- Time -->
+
+<div class="form-group">
+
+  <label>
+    Time <span class="required">*</span>
+  </label>
+
+  <div class="time-grid">
+
+    <!-- Hour -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-select
+        placeholder="HH"
+        [(ngModel)]="expense.hour">
+
+        <mat-option
+          *ngFor="let hour of hours"
+          [value]="hour">
+
+          {{ hour }}
+
+        </mat-option>
+
+      </mat-select>
+
+    </mat-form-field>
+
+    <!-- Minute -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-select
+        placeholder="MM"
+        [(ngModel)]="expense.minute">
+
+        <mat-option
+          *ngFor="let minute of minutes"
+          [value]="minute">
+
+          {{ minute }}
+
+        </mat-option>
+
+      </mat-select>
+
+    </mat-form-field>
+
+    <!-- AM / PM -->
+
+    <mat-form-field appearance="outline">
+
+      <mat-select
+        placeholder="AM/PM"
+        [(ngModel)]="expense.meridian">
+
+        <mat-option
+          *ngFor="let meridian of meridians"
+          [value]="meridian">
+
+          {{ meridian }}
+
+        </mat-option>
+
+      </mat-select>
+
+    </mat-form-field>
+
+  </div>
+
+</div>
+
       <!-- Payment Mode -->
       <div class="form-group">
 

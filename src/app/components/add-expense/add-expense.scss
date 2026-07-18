@@ -221,3 +221,15 @@ border-radius:16px !important;
 }
 
 }
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .time-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+}
