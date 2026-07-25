@@ -3,15 +3,28 @@
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  background: #f4f7fc;
 }
+
+/* ==========================
+   Content Area
+========================== */
 
 .page-area {
   width: 100%;
+  min-height: 100vh;
 }
 
 .main-content {
   width: 100%;
+  margin-top: 72px; /* Fixed header height */
+  padding: 24px;
+  box-sizing: border-box;
 }
+
+/* ==========================
+   Mobile Overlay
+========================== */
 
 .overlay {
   position: fixed;
@@ -21,14 +34,55 @@
   cursor: pointer;
 }
 
+/* ==========================
+   Desktop
+========================== */
+
 @media (min-width: 992px) {
 
   .page-area {
-    margin-left: 250px;
+    margin-left: 250px; /* Sidebar width */
     width: calc(100% - 250px);
+  }
+
+  .main-content {
+    margin-top: 72px;
+    padding: 24px;
   }
 
   .overlay {
     display: none;
   }
+
+}
+
+/* ==========================
+   Tablet
+========================== */
+
+@media (max-width: 991px) {
+
+  .page-area {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .main-content {
+    margin-top: 72px;
+    padding: 20px;
+  }
+
+}
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width: 600px) {
+
+  .main-content {
+    margin-top: 64px; /* Mobile header height */
+    padding: 16px;
+  }
+
 }
