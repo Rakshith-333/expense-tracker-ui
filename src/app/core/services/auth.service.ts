@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { LoginRequest } from '../models/login-request.model';
 import { LoginResponse, User } from '../models/login-response.model';
@@ -10,6 +10,7 @@ import { RegisterResponse } from '../models/register-response.model';
 import { DashboardResponse } from '../models/dashboard-response';
 import { AddExpenseRequest } from '../models/add-expense-request';
 import { AddExpenseResponse } from '../models/add-expense-response';
+import { ExpenseResponse } from '../models/expenses-response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -62,6 +63,29 @@ export class AuthService {
 
     return this.http.post<AddExpenseResponse>(`${this.baseUrl}${API.EXPENSES.ADDEXPENSE}`, payload, { headers })
   }
+
+  getExpenses(
+  page: number = 1,
+  pageSize: number = 10
+): Observable<ExpenseResponse> {
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  });
+
+  const params = new HttpParams()
+    .set('page', page)
+    .set('pageSize', pageSize);
+
+  return this.http.get<ExpenseResponse>(
+    `${this.baseUrl}${API.EXPENSES.GETEXPENSES}`,
+    {
+      headers,
+      params
+    }
+  );
+}
 
 //   logout(): void {
 //     localStorage.removeItem('authToken');

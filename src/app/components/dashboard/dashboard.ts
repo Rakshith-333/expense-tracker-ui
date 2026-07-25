@@ -25,7 +25,7 @@ const DEFAULT_CATEGORY_STYLE = { color: '#9CA3AF', icon: 'payments' };
 
 @Component({
   selector: 'app-dashboard',
-  imports: [materialImports,CommonModule, RouterModule, BaseChartDirective],
+  imports: [materialImports, CommonModule, RouterModule, BaseChartDirective],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

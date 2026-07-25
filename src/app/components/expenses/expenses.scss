@@ -1,0 +1,872 @@
+/* ==========================================
+   Expenses Page
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:host {
+    display: block;
+    min-height: 100vh;
+    background: #f6f8fc;
+    font-family: "Inter", sans-serif;
+}
+
+.expenses-page {
+    padding: 24px;
+    position: relative;
+}
+
+/* ==========================================
+   Header
+========================================== */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #ececec;
+}
+
+.page-header .left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.menu-btn {
+    display: none;
+}
+
+.page-header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #202124;
+}
+
+.page-header .right {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.notification {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff3b30;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome {
+    font-size: 17px;
+    color: #555;
+}
+
+.welcome strong {
+    color: #212121;
+}
+
+/* ==========================================
+   Summary Cards
+========================================== */
+
+.summary-section {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 24px;
+
+    padding: 0 30px 30px;
+
+}
+
+.summary-card {
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+
+    transition: .3s;
+
+}
+
+.summary-card:hover {
+
+    transform: translateY(-3px);
+
+}
+
+.card-left {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+.card-title {
+
+    font-size: 15px;
+
+    color: #6b7280;
+
+}
+
+.card-left h2 {
+
+    margin: 0;
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+}
+
+.card-left small {
+
+    font-size: 14px;
+
+    color: #6b7280;
+
+}
+
+.card-icon {
+
+    height: 60px;
+
+    width: 60px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.card-icon mat-icon {
+
+    font-size: 30px;
+
+    height: 30px;
+
+    width: 30px;
+
+    color: #fff;
+
+}
+
+/* Purple */
+
+.purple-card {
+
+    background: #faf5ff;
+
+}
+
+.purple-card h2 {
+
+    color: #6d28d9;
+
+}
+
+.purple-icon {
+
+    background: #7c3aed;
+
+}
+
+/* Green */
+
+.green-card {
+
+    background: #f0fdf4;
+
+}
+
+.green-card h2 {
+
+    color: #16a34a;
+
+}
+
+.green-icon {
+
+    background: #22c55e;
+
+}
+
+/* Blue */
+
+.blue-card {
+
+    background: #eff6ff;
+
+}
+
+.blue-card h2 {
+
+    color: #2563eb;
+
+}
+
+.blue-icon {
+
+    background: #3b82f6;
+
+}
+
+/* Orange */
+
+.orange-card {
+
+    background: #fff7ed;
+
+}
+
+.orange-card h2 {
+
+    color: #ea580c;
+
+}
+
+.orange-icon {
+
+    background: #f97316;
+
+}
+
+/* ==========================
+Summary Responsive
+========================== */
+
+
+@media(max-width:1200px) {
+
+    .summary-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+
+@media(max-width:768px) {
+
+    .summary-section {
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 14px;
+
+        padding: 0 16px 20px;
+
+    }
+
+
+    .summary-card {
+
+        padding: 16px;
+
+        min-height: 110px;
+
+    }
+
+
+    .card-left {
+
+        gap: 5px;
+
+    }
+
+
+    .card-title {
+
+        font-size: 13px;
+
+    }
+
+
+    .card-left h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .card-left small {
+
+        font-size: 11px;
+
+    }
+
+
+    .card-icon {
+
+        width: 48px;
+
+        height: 48px;
+
+    }
+
+
+    .card-icon mat-icon {
+
+        font-size: 24px;
+
+        width: 24px;
+
+        height: 24px;
+
+    }
+
+}
+
+
+
+@media(max-width:480px) {
+
+
+    .summary-section {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .summary-card {
+
+        padding: 18px;
+
+    }
+
+
+    .card-left h2 {
+
+        font-size: 28px;
+
+    }
+
+
+    .card-icon {
+
+        width: 58px;
+
+        height: 58px;
+
+    }
+
+
+}
+
+
+/* ==========================================
+   Filters
+========================================== */
+
+.filter-section {
+    display: grid;
+    grid-template-columns: 2fr 220px 220px 140px;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.filter-section .mat-mdc-form-field {
+    width: 100%;
+}
+
+.search input {
+    font-size: 15px;
+}
+
+.filter-btn {
+    height: 56px;
+    border-radius: 14px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   Table
+========================================== */
+
+.table-wrapper {
+    overflow-x: auto;
+    background: white;
+    border-radius: 18px;
+    border: 1px solid #ececec;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #fafbff;
+}
+
+thead th {
+    text-align: left;
+    padding: 20px;
+    font-size: 14px;
+    color: #5d6475;
+    font-weight: 700;
+    border-bottom: 1px solid #ececec;
+}
+
+tbody td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f2f2f2;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: #fafcff;
+}
+
+.title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+tbody small {
+    color: #777;
+}
+
+.amount {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* ==========================================
+   Category
+========================================== */
+
+.category {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cat-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f1ebff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cat-icon mat-icon {
+    color: #6d28d9;
+}
+
+/* ==========================================
+   Payment Badge
+========================================== */
+
+.payment {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 16px;
+    border-radius: 8px;
+    background: #eaf8ed;
+    color: #16a34a;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ==========================================
+   Mobile Expense Cards
+========================================== */
+
+.mobile-list {
+    display: none;
+    margin-top: 20px;
+}
+
+.expense-card {
+    border-radius: 18px;
+    margin-bottom: 16px;
+    border: 1px solid #ececec;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .05);
+    overflow: hidden;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 18px;
+}
+
+.card-top .left {
+    display: flex;
+    gap: 14px;
+    flex: 1;
+}
+
+.card-top h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.card-top p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.card-top small {
+    color: #8b8b8b;
+    font-size: 13px;
+}
+
+.card-top .right {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    border-top: 1px solid #f2f2f2;
+}
+
+/* ==========================================
+   Footer
+========================================== */
+
+.table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding: 18px 0;
+}
+
+.table-footer>div:first-child {
+    color: #666;
+    font-size: 15px;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pagination button {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.pagination .active {
+    background: #6d28d9;
+    color: #fff;
+}
+
+/* ==========================================
+   Floating Button
+========================================== */
+
+.fab {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    box-shadow: 0 12px 30px rgba(109, 40, 217, .35);
+    z-index: 100;
+}
+
+.fab mat-icon {
+    font-size: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+/* ==========================================
+   Material Override
+========================================== */
+
+.mat-mdc-card {
+    background: #fff !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+.mat-mdc-text-field-wrapper {
+    border-radius: 14px !important;
+}
+
+.mat-mdc-icon-button {
+    color: #6d28d9;
+}
+
+.mat-mdc-stroked-button {
+    border-radius: 14px;
+}
+
+/* ==========================================
+   Laptop
+========================================== */
+
+@media (max-width:1200px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filter-section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* ==========================================
+   Tablet
+========================================== */
+
+@media (max-width:992px) {
+
+    .expenses-page {
+        padding: 18px;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .summary-card {
+        padding: 18px;
+    }
+
+    .summary-card h2 {
+        font-size: 28px;
+    }
+
+    .filter-section {
+        grid-template-columns: 1fr;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+}
+
+/* ==========================================
+   Mobile
+========================================== */
+
+@media (max-width:768px) {
+
+    .expenses-page {
+        padding: 16px;
+        padding-bottom: 100px;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
+    .welcome {
+        display: none;
+    }
+
+    .page-header {
+        margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+        font-size: 30px;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .summary-card {
+        padding: 16px;
+        gap: 14px;
+    }
+
+    .summary-card h2 {
+        font-size: 22px;
+    }
+
+    .summary-card span {
+        font-size: 13px;
+    }
+
+    .summary-card small {
+        font-size: 12px;
+    }
+
+    .icon {
+        width: 52px;
+        height: 52px;
+    }
+
+    .icon mat-icon {
+        font-size: 26px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .filter-section {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .table-wrapper {
+        display: none;
+    }
+
+    .mobile-list {
+        display: block;
+    }
+
+    .table-footer {
+        flex-direction: column;
+        gap: 18px;
+        align-items: flex-start;
+    }
+
+    .pagination {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+}
+
+/* ==========================================
+   Small Mobile
+========================================== */
+
+@media (max-width:480px) {
+
+    .expenses-page {
+        padding: 14px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header h1 {
+        font-size: 26px;
+    }
+
+    .page-header {
+        gap: 10px;
+    }
+
+    .card-top {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .card-top .right {
+        font-size: 22px;
+    }
+
+    .card-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .fab {
+        width: 58px;
+        height: 58px;
+        right: 18px;
+        bottom: 18px;
+    }
+
+}
+
+/* ==========================================
+   Large Desktop
+========================================== */
+
+@media (min-width:1400px) {
+
+    .expenses-page {
+        max-width: 1600px;
+        margin: auto;
+    }
+
+    .summary-card {
+        min-height: 120px;
+    }
+
+    table th,
+    table td {
+        padding: 22px;
+    }
+
+}

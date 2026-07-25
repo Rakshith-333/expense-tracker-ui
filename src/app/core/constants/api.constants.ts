@@ -8,6 +8,7 @@ export const API ={
         REFRESH: '/auth/refresh-token'
     },
     EXPENSES: {
-        ADDEXPENSE: '/expenses'
+        ADDEXPENSE: '/expenses',
+        GETEXPENSES: '/expenses'
     }
 }

@@ -1,1 +1,555 @@
-<div class="dashboard-container"></div>
+<div class="expenses-page">
+
+    <!-- Header -->
+    <!-- <header class="page-header">
+
+    <div class="left">
+
+      <button mat-icon-button class="menu-btn">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <h1>Expenses</h1>
+
+    </div>
+
+    <div class="right">
+
+      <button mat-icon-button class="notification">
+
+        <mat-icon>notifications_none</mat-icon>
+
+        <span class="badge">3</span>
+
+      </button>
+
+      <div class="welcome">
+
+        Good Morning,
+        <strong>Manu!</strong>
+        👋
+
+      </div>
+
+    </div>
+
+  </header> -->
+
+    <!-- Summary Cards -->
+
+    <!-- <section class="summary-grid">
+
+    <mat-card class="summary-card">
+
+      <div class="icon purple">
+
+        <mat-icon>account_balance_wallet</mat-icon>
+
+      </div>
+
+      <div>
+
+        <span>Total Expenses</span>
+
+        <h2>₹{{totalAmount}}</h2>
+
+        <small>This Month</small>
+
+      </div>
+
+    </mat-card>
+
+    <mat-card class="summary-card">
+
+      <div class="icon green">
+
+        <mat-icon>trending_up</mat-icon>
+
+      </div>
+
+      <div>
+
+        <span>Average per Day</span>
+
+        <h2>₹{{averageAmount}}</h2>
+
+        <small>This Month</small>
+
+      </div>
+
+    </mat-card>
+
+    <mat-card class="summary-card">
+
+      <div class="icon blue">
+
+        <mat-icon>calendar_month</mat-icon>
+
+      </div>
+
+      <div>
+
+        <span>Total Transactions</span>
+
+        <h2>{{expenses.length}}</h2>
+
+        <small>This Month</small>
+
+      </div>
+
+    </mat-card>
+
+    <mat-card class="summary-card">
+
+      <div class="icon orange">
+
+        <mat-icon>pie_chart</mat-icon>
+
+      </div>
+
+      <div>
+
+        <span>Highest Expense</span>
+
+        <h2>₹{{highestExpense}}</h2>
+
+        <small>{{highestExpenseDescription}}</small>
+
+      </div>
+
+    </mat-card>
+
+  </section> -->
+
+    <section class="summary-section">
+
+
+        <div class="summary-card purple-card">
+
+
+            <div class="card-left">
+
+                <span class="card-title">
+                    Total Expenses
+                </span>
+
+                <h2>
+                    ₹{{totalAmount}}
+                </h2>
+
+                <small>
+                    This Month
+                </small>
+
+            </div>
+
+
+            <div class="card-icon purple-icon">
+
+                <mat-icon>
+                    account_balance_wallet
+                </mat-icon>
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <div class="summary-card green-card">
+
+
+            <div class="card-left">
+
+                <span class="card-title">
+                    Average per Day
+                </span>
+
+                <h2>
+                    ₹{{averageAmount}}
+                </h2>
+
+                <small>
+                    This Month
+                </small>
+
+            </div>
+
+
+            <div class="card-icon green-icon">
+
+                <mat-icon>
+                    trending_up
+                </mat-icon>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="summary-card blue-card">
+
+
+            <div class="card-left">
+
+                <span class="card-title">
+                    Total Transactions
+                </span>
+
+                <h2>
+                    {{expenses.length}}
+                </h2>
+
+                <small>
+                    This Month
+                </small>
+
+            </div>
+
+
+            <div class="card-icon blue-icon">
+
+                <mat-icon>
+                    calendar_month
+                </mat-icon>
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <div class="summary-card orange-card">
+
+
+            <div class="card-left">
+
+                <span class="card-title">
+                    Highest Expense
+                </span>
+
+                <h2>
+                    ₹{{highestExpense}}
+                </h2>
+
+                <small>
+                    {{highestExpenseDescription}}
+                </small>
+
+            </div>
+
+
+            <div class="card-icon orange-icon">
+
+                <mat-icon>
+                    pie_chart
+                </mat-icon>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+    <!-- Filters -->
+
+    <section class="filter-section">
+
+        <mat-form-field appearance="outline" class="search">
+
+            <mat-icon matPrefix>search</mat-icon>
+
+            <input matInput placeholder="Search expenses..." />
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+
+            <mat-select placeholder="Month">
+
+                <mat-option>May 2025</mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+
+            <mat-select placeholder="Category">
+
+                <mat-option>All Categories</mat-option>
+
+            </mat-select>
+
+        </mat-form-field>
+
+        <button mat-stroked-button class="filter-btn">
+
+            <mat-icon>filter_list</mat-icon>
+
+            Filters
+
+        </button>
+
+    </section>
+
+    <!-- Desktop Table -->
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+
+                    <th>Description</th>
+
+                    <th>Category</th>
+
+                    <th>Amount</th>
+
+                    <th>Payment</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let item of expenses">
+
+                    <td>
+
+                        <strong>{{formatDate(item.expenseDate)}}</strong>
+
+                        <small>{{formatDay(item.expenseDate)}}</small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="title">
+
+                            {{item.description}}
+
+                        </div>
+
+                        <small>
+
+                            {{item.notes || '-'}}
+
+                        </small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="category">
+
+                            <div class="cat-icon">
+
+                                <mat-icon>
+
+                                    {{getCategoryIcon(item.category)}}
+
+                                </mat-icon>
+
+                            </div>
+
+                            {{item.category}}
+
+                        </div>
+
+                    </td>
+
+                    <td class="amount">
+
+                        ₹{{item.amount}}
+
+                    </td>
+
+                    <td>
+
+                        <span class="payment">
+
+                            {{item.paymentMode}}
+
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <button mat-icon-button color="primary">
+
+                            <mat-icon>edit</mat-icon>
+
+                        </button>
+
+                        <button mat-icon-button color="warn">
+
+                            <mat-icon>delete</mat-icon>
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Mobile Cards -->
+
+    <div class="mobile-list">
+
+        <mat-card class="expense-card" *ngFor="let item of expenses">
+
+            <div class="card-top">
+
+                <div class="left">
+
+                    <div class="cat-icon">
+
+                        <mat-icon>
+
+                            {{getCategoryIcon(item.category)}}
+
+                        </mat-icon>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+
+                            {{item.description}}
+
+                        </h3>
+
+                        <p>
+
+                            {{item.category}}
+
+                        </p>
+
+                        <small>
+
+                            {{formatDate(item.expenseDate)}}
+                            •
+                            {{formatDay(item.expenseDate)}}
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="right">
+
+                    ₹{{item.amount}}
+
+                </div>
+
+            </div>
+
+            <div class="card-bottom">
+
+                <span class="payment">
+
+                    {{item.paymentMode}}
+
+                </span>
+
+                <div class="actions">
+
+                    <button mat-icon-button color="primary">
+
+                        <mat-icon>edit</mat-icon>
+
+                    </button>
+
+                    <button mat-icon-button color="warn">
+
+                        <mat-icon>delete</mat-icon>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </mat-card>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="table-footer">
+
+        <div>
+
+            Showing
+            {{expenses.length}}
+            of
+            {{pagination.totalExpenses}}
+            expenses
+
+        </div>
+
+        <div class="pagination">
+
+            <button mat-icon-button (click)="previousPage()">
+
+                <mat-icon>chevron_left</mat-icon>
+
+            </button>
+
+            <button mat-button *ngFor="let page of pages" [class.active]="page===pagination.currentPage"
+                (click)="goToPage(page)">
+
+                {{page}}
+
+            </button>
+
+            <button mat-icon-button (click)="nextPage()">
+
+                <mat-icon>chevron_right</mat-icon>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Floating Button -->
+
+    <!-- <button
+    mat-fab
+    color="primary"
+    class="fab"
+    (click)="addExpense()">
+
+    <mat-icon>add</mat-icon>
+
+  </button> -->
+
+</div>
