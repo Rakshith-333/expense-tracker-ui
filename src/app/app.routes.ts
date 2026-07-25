@@ -32,22 +32,34 @@ export const routes: Routes = [
 
       {
         path: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
+        data:{
+        title:'Dashboard'
+    }
       },
 
       {
         path: 'expenses',
-        component: Expenses
+        component: Expenses,
+        data:{
+        title:'Expenses'
+    }
       },
 
       {
         path: 'add-expense',
-        component: AddExpense
+        component: AddExpense,
+        data:{
+            title:'Add Expense'
+        }
       },
 
       {
         path: 'settings',
-        component: Settings
+        component: Settings,
+        data:{
+        title:'Settings'
+        }
       },
 
     ]

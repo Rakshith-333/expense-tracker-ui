@@ -1,8 +1,9 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { materialImports } from '../../material';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../core/services/token.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,10 @@ export class Header implements OnInit {
 
 
   private readonly tokenService = inject(TokenService);
-
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private readonly cdr = inject(ChangeDetectorRef);
+  pageTitle = 'Dashboard';
 
   @Output()
   menuClicked = new EventEmitter<void>();
@@ -35,8 +39,35 @@ export class Header implements OnInit {
   ngOnInit(){
 
     this.setGreeting();
+    this.dynamicHeaderName()
 
   }
+dynamicHeaderName() {
+
+  const updateTitle = () => {
+    let currentRoute = this.activatedRoute.root;
+
+    while (currentRoute.firstChild) {
+      currentRoute = currentRoute.firstChild;
+    }
+
+    this.pageTitle = currentRoute.snapshot.data['title'] ?? 'Dashboard';
+    this.cdr.detectChanges();
+
+    console.log(
+      'Current URL:',
+      this.router.url,
+      'Title:',
+      this.pageTitle
+    );
+  };
+
+  updateTitle();
+
+  this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => updateTitle());
+}
 
 
 
