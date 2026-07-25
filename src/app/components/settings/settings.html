@@ -1,0 +1,664 @@
+<div class="settings-container">
+
+    <!-- ==========================
+         Page Header
+    ========================== -->
+
+    <div class="page-header">
+
+        <h2>Settings</h2>
+
+    </div>
+
+    <!-- ==========================
+         Profile Card
+    ========================== -->
+
+    <div class="settings-card">
+
+        <div class="card-header">
+
+            <div class="header-left">
+
+                <div class="card-icon">
+
+                    <mat-icon>
+
+                        person
+
+                    </mat-icon>
+
+                </div>
+
+                <div>
+
+                    <h3>
+
+                        Profile Information
+
+                    </h3>
+
+                    <p>
+
+                        Manage your personal details
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button
+                mat-stroked-button
+                color="primary"
+                class="edit-btn">
+
+                <mat-icon>
+
+                    edit
+
+                </mat-icon>
+
+                Edit Profile
+
+            </button>
+
+        </div>
+
+        <!-- Full Name -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>
+
+                    Full Name
+
+                </label>
+
+                <span>
+
+                    {{user?.name}}
+
+                </span>
+
+            </div>
+
+            <button mat-icon-button>
+
+                <mat-icon>
+
+                    chevron_right
+
+                </mat-icon>
+
+            </button>
+
+        </div>
+
+        <!-- Email -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>
+
+                    Email Address
+
+                </label>
+
+                <span>
+
+                    {{user?.email}}
+
+                </span>
+
+            </div>
+
+            <button mat-icon-button>
+
+                <mat-icon>
+
+                    chevron_right
+
+                </mat-icon>
+
+            </button>
+
+        </div>
+
+        <!-- Mobile -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>
+
+                    Phone Number
+
+                </label>
+
+                <span>
+
+                    {{user?.mobileNumber || '+91 XXXXX XXXXX'}}
+
+                </span>
+
+            </div>
+
+            <button mat-icon-button>
+
+                <mat-icon>
+
+                    chevron_right
+
+                </mat-icon>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================
+         Daily Reminder
+         Starts in Part 2
+    ========================== -->
+    <!--=========================================
+        Daily Reminder Card
+    ==========================================-->
+
+    <div class="settings-card">
+
+        <div class="card-header">
+
+            <div class="header-left">
+
+                <div class="card-icon">
+
+                    <mat-icon>
+                        notifications
+                    </mat-icon>
+
+                </div>
+
+                <div>
+
+                    <h3>Daily Reminder</h3>
+
+                    <p>Get reminded daily to track your expenses</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Reminder Time -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>Reminder Time</label>
+
+                <span>Choose the time you want to receive daily reminder</span>
+
+            </div>
+
+            <mat-form-field appearance="outline" class="small-field">
+
+                <mat-select [(value)]="reminderTime">
+
+                    <mat-option value="08:00 PM">
+                        08:00 PM
+                    </mat-option>
+
+                    <mat-option value="09:00 PM">
+                        09:00 PM
+                    </mat-option>
+
+                    <mat-option value="10:00 PM">
+                        10:00 PM
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+        <!-- Reminder Switch -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>Reminder Status</label>
+
+                <span>Enable or disable daily reminders</span>
+
+            </div>
+
+            <mat-slide-toggle
+                color="primary"
+                [(ngModel)]="reminderEnabled">
+
+            </mat-slide-toggle>
+
+        </div>
+
+    </div>
+
+
+    <!--=========================================
+        Preferences Card
+    ==========================================-->
+
+    <div class="settings-card">
+
+        <div class="card-header">
+
+            <div class="header-left">
+
+                <div class="card-icon">
+
+                    <mat-icon>
+                        tune
+                    </mat-icon>
+
+                </div>
+
+                <div>
+
+                    <h3>Preferences</h3>
+
+                    <p>Customize your app experience</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Currency -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>Default Currency</label>
+
+            </div>
+
+            <mat-form-field appearance="outline" class="small-field">
+
+                <mat-select [(value)]="currency">
+
+                    <mat-option value="INR">
+                        ₹ INR - Indian Rupee
+                    </mat-option>
+
+                    <mat-option value="USD">
+                        $ USD - US Dollar
+                    </mat-option>
+
+                    <mat-option value="EUR">
+                        € EUR - Euro
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+        <!-- Date Format -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>Date Format</label>
+
+            </div>
+
+            <mat-form-field appearance="outline" class="small-field">
+
+                <mat-select [(value)]="dateFormat">
+
+                    <mat-option value="DD MMM YYYY">
+
+                        DD MMM YYYY (24 May 2025)
+
+                    </mat-option>
+
+                    <mat-option value="DD/MM/YYYY">
+
+                        DD/MM/YYYY
+
+                    </mat-option>
+
+                    <mat-option value="MM/DD/YYYY">
+
+                        MM/DD/YYYY
+
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+        <!-- Theme -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>Theme</label>
+
+            </div>
+
+            <mat-form-field appearance="outline" class="small-field">
+
+                <mat-select [(value)]="theme">
+
+                    <mat-option value="light">
+
+                        Light
+
+                    </mat-option>
+
+                    <mat-option value="dark">
+
+                        Dark
+
+                    </mat-option>
+
+                    <mat-option value="system">
+
+                        System Default
+
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+        <!-- Language -->
+
+        <div class="setting-item">
+
+            <div>
+
+                <label>Language</label>
+
+            </div>
+
+            <mat-form-field appearance="outline" class="small-field">
+
+                <mat-select [(value)]="language">
+
+                    <mat-option value="English">
+
+                        English
+
+                    </mat-option>
+
+                    <mat-option value="Kannada">
+
+                        Kannada
+
+                    </mat-option>
+
+                    <mat-option value="Hindi">
+
+                        Hindi
+
+                    </mat-option>
+
+                </mat-select>
+
+            </mat-form-field>
+
+        </div>
+
+    </div>
+
+    <!--=========================================
+        Security Card
+        Starts in Part 3
+    ==========================================-->
+<!--=========================================
+        Security Card
+    ==========================================-->
+
+    <div class="settings-card">
+
+        <div class="card-header">
+
+            <div class="header-left">
+
+                <div class="card-icon">
+
+                    <mat-icon>
+                        shield
+                    </mat-icon>
+
+                </div>
+
+                <div>
+
+                    <h3>Security</h3>
+
+                    <p>Manage your account security</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Change Password -->
+
+        <div
+            class="setting-item clickable"
+            (click)="changePassword()">
+
+            <div>
+
+                <label>
+
+                    Change Password
+
+                </label>
+
+                <span>
+
+                    Update your account password
+
+                </span>
+
+            </div>
+
+            <mat-icon>
+
+                chevron_right
+
+            </mat-icon>
+
+        </div>
+
+        <!-- Logout Devices -->
+
+        <div
+            class="setting-item clickable"
+            (click)="logoutAllDevices()">
+
+            <div>
+
+                <label>
+
+                    Logout from all devices
+
+                </label>
+
+                <span>
+
+                    Sign out from all devices except this one
+
+                </span>
+
+            </div>
+
+            <mat-icon>
+
+                chevron_right
+
+            </mat-icon>
+
+        </div>
+
+    </div>
+
+
+
+    <!--=========================================
+        Account Card
+    ==========================================-->
+
+    <div class="settings-card">
+
+        <div class="card-header">
+
+            <div class="header-left">
+
+                <div class="card-icon red">
+
+                    <mat-icon>
+
+                        person
+
+                    </mat-icon>
+
+                </div>
+
+                <div>
+
+                    <h3>
+
+                        Account
+
+                    </h3>
+
+                    <p>
+
+                        Manage your account
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Logout -->
+
+        <div
+            class="setting-item clickable"
+            (click)="logout()">
+
+            <div>
+
+                <label>
+
+                    Logout
+
+                </label>
+
+                <span>
+
+                    Sign out from your account
+
+                </span>
+
+            </div>
+
+            <mat-icon>
+
+                chevron_right
+
+            </mat-icon>
+
+        </div>
+
+        <!-- Delete Account -->
+
+        <div
+            class="setting-item clickable danger"
+            (click)="deleteAccount()">
+
+            <div>
+
+                <label>
+
+                    Delete Account
+
+                </label>
+
+                <span>
+
+                    Permanently delete your account and all data
+
+                </span>
+
+            </div>
+
+            <mat-icon color="warn">
+
+                chevron_right
+
+            </mat-icon>
+
+        </div>
+
+    </div>
+
+
+
+    <!--=========================================
+        Footer
+    ==========================================-->
+
+    <div class="settings-footer">
+
+        <span>
+
+            Version 1.0.0
+
+        </span>
+
+        <span>
+
+            •
+
+        </span>
+
+        <span>
+
+            Made with ❤️ for better financial habits
+
+        </span>
+
+    </div>
+
+</div>
+
