@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { materialImports } from '../../material';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -16,6 +16,10 @@ import { RouterModule } from '@angular/router';
 export class Sidebar {
 
   @Input() sidebarOpen = false;
+  @Output() menuSelected = new EventEmitter<void>();
+  closeSidebar() {
+    this.menuSelected.emit();
+  }
   
 
 }

@@ -1,6 +1,6 @@
 <div class="layout-container">
 
-  <app-sidebar [sidebarOpen]="sidebarOpen"></app-sidebar>
+  <app-sidebar [sidebarOpen]="sidebarOpen" (menuSelected)="closeSidebar()"></app-sidebar>
 
   <div class="page-area">
     <app-header (menuClicked)="toggleSidebar()"></app-header>

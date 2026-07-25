@@ -31,5 +31,11 @@ console.log('Sidebar:', this.sidebarOpen);
 
 }
 
+closeSidebar() {
+  if (window.innerWidth < 992) {
+    this.sidebarOpen = false;
+  }
+}
+
 
 }

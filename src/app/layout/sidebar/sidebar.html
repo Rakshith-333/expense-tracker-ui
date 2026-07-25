@@ -74,7 +74,8 @@
       <a
         routerLink="/dashboard"
         routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }">
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeSidebar()">
 
         <mat-icon>dashboard</mat-icon>
         Dashboard
@@ -83,7 +84,8 @@
 
       <a
         routerLink="/expenses"
-        routerLinkActive="active">
+        routerLinkActive="active"
+        (click)="closeSidebar()">
 
         <mat-icon>receipt_long</mat-icon>
         Expenses
@@ -92,7 +94,8 @@
 
       <a
         routerLink="/add-expense"
-        routerLinkActive="active">
+        routerLinkActive="active"
+        (click)="closeSidebar()">
 
         <mat-icon>add_circle</mat-icon>
         Add Expense
@@ -110,7 +113,8 @@
 
       <a
         routerLink="/reports"
-        routerLinkActive="active">
+        routerLinkActive="active"
+        (click)="closeSidebar()">
 
         <mat-icon>analytics</mat-icon>
         Reports
@@ -119,7 +123,8 @@
 
       <a
         routerLink="/settings"
-        routerLinkActive="active">
+        routerLinkActive="active"
+        (click)="closeSidebar()">
 
         <mat-icon>settings</mat-icon>
         Settings
