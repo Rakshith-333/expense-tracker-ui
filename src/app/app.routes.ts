@@ -10,6 +10,7 @@ import { Expenses } from './components/expenses/expenses';
 import { AddExpense } from './components/add-expense/add-expense';
 import { MainLayout } from './layout/main-layout/main-layout';
 import { Settings } from './components/settings/settings';
+import { Reports } from './components/reports/reports';
 
 export const routes: Routes = [
     {
@@ -51,6 +52,13 @@ export const routes: Routes = [
         component: AddExpense,
         data:{
             title:'Add Expense'
+        }
+      },
+      {
+        path: 'reports',
+        component: Reports,
+        data:{
+            title:'Reports'
         }
       },
 
