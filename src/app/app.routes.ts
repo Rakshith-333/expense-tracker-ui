@@ -9,6 +9,7 @@ import { guestGuard } from './core/guards/guest.guard';
 import { Expenses } from './components/expenses/expenses';
 import { AddExpense } from './components/add-expense/add-expense';
 import { MainLayout } from './layout/main-layout/main-layout';
+import { Settings } from './components/settings/settings';
 
 export const routes: Routes = [
     {
@@ -42,7 +43,12 @@ export const routes: Routes = [
       {
         path: 'add-expense',
         component: AddExpense
-      }
+      },
+
+      {
+        path: 'settings',
+        component: Settings
+      },
 
     ]
   }
