@@ -161,6 +161,46 @@
 
         </div>
 
+        <!-- Monthly Budget -->
+
+        <div class="setting-item budget-setting">
+
+            <div>
+
+                <label>
+
+                    Monthly Budget
+
+                </label>
+
+                <span>
+
+                    Current saved budget: ₹{{ user?.monthlyBudget ?? 0 }}
+
+                </span>
+
+            </div>
+
+            <div class="budget-actions">
+
+                <mat-form-field appearance="outline" class="small-field">
+
+                    <mat-label>Enter budget</mat-label>
+
+                    <input matInput type="number" min="0" [(ngModel)]="monthlyBudget" />
+
+                </mat-form-field>
+
+                <button mat-stroked-button color="primary" (click)="saveBudget()">
+
+                    Save
+
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
     <!-- ==========================

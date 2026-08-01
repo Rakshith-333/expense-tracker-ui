@@ -1,76 +1,78 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { materialImports } from '../../material';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
+import { TokenService } from '../../core/services/token.service';
+import { ProfileResponse, ProfileUser } from '../../core/models/profile-response.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings',
-  imports: [materialImports,FormsModule,CommonModule ],
+  imports: [materialImports, FormsModule, CommonModule],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
 })
-export class Settings {
-  //=========================
-  // User Details
-  //=========================
+export class Settings implements OnInit {
+  private readonly authService = inject(AuthService);
+  private readonly tokenService = inject(TokenService);
+  private readonly snackBar = inject(MatSnackBar);
 
-  user = {
-    name: 'Manohara H C',
-    email: 'manohara@example.com',
-    mobileNumber: '+91 9876543210'
+  user: ProfileUser = {
+    name: '',
+    email: '',
+    mobileNumber: '+91 XXXXX XXXXX',
+    monthlyBudget: 0,
   };
 
-  //=========================
-  // Reminder
-  //=========================
-
+  monthlyBudget = 0;
   reminderEnabled = true;
-
   reminderTime = '08:00 PM';
-
-  //=========================
-  // Preferences
-  //=========================
-
   currency = 'INR';
-
   dateFormat = 'DD MMM YYYY';
-
   theme = 'light';
-
   language = 'English';
 
-  //=========================
-  // Dropdown Data
-  //=========================
+  currencies = ['INR', 'USD', 'EUR'];
+  dateFormats = ['DD MMM YYYY', 'DD/MM/YYYY', 'MM/DD/YYYY'];
+  themes = ['light', 'dark', 'system'];
+  languages = ['English', 'Kannada', 'Hindi'];
 
-  currencies = [
-    'INR',
-    'USD',
-    'EUR'
-  ];
+  ngOnInit(): void {
+    this.loadProfile();
+  }
 
-  dateFormats = [
-    'DD MMM YYYY',
-    'DD/MM/YYYY',
-    'MM/DD/YYYY'
-  ];
+  private loadProfile(): void {
+    this.authService.getProfile().subscribe({
+      next: (response: ProfileResponse) => {
+        this.user = response.user;
+        this.monthlyBudget = Number(response.user.monthlyBudget ?? 0);
+        this.tokenService.saveUser(response.user);
+      },
+      error: () => {
+        this.snackBar.open('Unable to load profile settings', 'Close', {
+          duration: 3000,
+        });
+      },
+    });
+  }
 
-  themes = [
-    'light',
-    'dark',
-    'system'
-  ];
-
-  languages = [
-    'English',
-    'Kannada',
-    'Hindi'
-  ];
-
-  //=========================
-  // Button Actions
-  //=========================
+  saveBudget(): void {
+    this.authService.updateMonthlyBudget({ monthlyBudget: this.monthlyBudget }).subscribe({
+      next: () => {
+        this.user.monthlyBudget = this.monthlyBudget;
+        this.tokenService.saveUser(this.user);
+        this.snackBar.open('Monthly budget saved successfully', 'Close', {
+          duration: 2500,
+        });
+      },
+      error: () => {
+        this.snackBar.open('Unable to save monthly budget', 'Close', {
+          duration: 3000,
+        });
+      },
+    });
+  }
 
   changePassword(): void {
     console.log('Change Password');
@@ -85,15 +87,10 @@ export class Settings {
   }
 
   deleteAccount(): void {
-
-    const confirmation = confirm(
-      'Are you sure you want to delete your account?'
-    );
+    const confirmation = confirm('Are you sure you want to delete your account?');
 
     if (confirmation) {
       console.log('Delete Account');
     }
-
   }
-
 }

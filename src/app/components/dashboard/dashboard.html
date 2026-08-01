@@ -35,6 +35,20 @@
 
   </section>
 
+  <section class="budget-overview-card" *ngIf="!isLoading && !hasError">
+    <div class="section-header">
+      <h2>Budget Overview</h2>
+    </div>
+
+    <div class="budget-insight-grid">
+      <div class="budget-insight" *ngFor="let insight of budgetInsights">
+        <span class="insight-label">{{ insight.label }}</span>
+        <strong>{{ insight.value }}</strong>
+        <small>{{ insight.helper }}</small>
+      </div>
+    </div>
+  </section>
+
   <section class="chart-card">
 
     <div class="chart-header">

@@ -7,6 +7,10 @@ export const API ={
         EXPENSES: '/expenses',
         REFRESH: '/auth/refresh-token'
     },
+    PROFILE: {
+        GET: '/profile',
+        UPDATE_BUDGET: '/profile/budget'
+    },
     EXPENSES: {
         ADDEXPENSE: '/expenses',
         GETEXPENSES: '/expenses'

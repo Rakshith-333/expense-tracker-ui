@@ -9,21 +9,30 @@ export interface DashboardData {
   categorySummary: CategorySummary[];
   recentExpenses: RecentExpense[];
   monthlyTrend: MonthlyTrend[];
-  topCategories: TopCategory;
+  topCategories: TopCategory | TopCategory[];
 }
 
 export interface DashboardSummary {
+  monthlyBudget?: number;
+  totalSpent?: number;
+  remainingBalance?: number;
+  budgetUtilization?: number;
+  budgetStatus?: string;
+  remainingDays?: number;
+  dailyLimit?: number;
   totalThisMonth: SummaryAmount;
   todaysExpenses: number;
   todaysTransactions: number;
   thisWeeksExpenses: SummaryAmount;
   thisMonthsTransactions: number;
+  comparison?: ComparisonSummary;
+  forecast?: ForecastSummary;
 }
 
 export interface SummaryAmount {
   amount: number;
   percentage: number;
-  trend: 'up' | 'down' | 'neutral';
+  trend: 'up' | 'down' | 'neutral' | string;
 }
 
 export interface CategorySummary {
@@ -50,4 +59,16 @@ export interface TopCategory {
   category: string;
   totalAmount: number;
   percentage: number;
+}
+
+export interface ComparisonSummary {
+  previousMonth: number;
+  currentMonth: number;
+  difference: number;
+  trend: string;
+}
+
+export interface ForecastSummary {
+  predictedSpend: number;
+  status: string;
 }

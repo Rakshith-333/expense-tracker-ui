@@ -11,6 +11,7 @@ import { DashboardResponse } from '../models/dashboard-response';
 import { AddExpenseRequest } from '../models/add-expense-request';
 import { AddExpenseResponse } from '../models/add-expense-response';
 import { ExpenseResponse } from '../models/expenses-response';
+import { ProfileResponse, UpdateMonthlyBudgetRequest, UpdateMonthlyBudgetResponse } from '../models/profile-response.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -53,6 +54,38 @@ export class AuthService {
       `${this.baseUrl}${API.AUTH.DASHBOARD}`,
       { headers }
     );
+  }
+
+  getProfile(): Observable<ProfileResponse> {
+    const token = localStorage.getItem('token');
+    const headersConfig: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(headersConfig);
+
+    return this.http.get<ProfileResponse>(`${this.baseUrl}${API.PROFILE.GET}`, { headers });
+  }
+
+  updateMonthlyBudget(payload: UpdateMonthlyBudgetRequest): Observable<UpdateMonthlyBudgetResponse> {
+    const token = localStorage.getItem('token');
+    const headersConfig: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(headersConfig);
+
+    return this.http.put<UpdateMonthlyBudgetResponse>(`${this.baseUrl}${API.PROFILE.UPDATE_BUDGET}`, payload, { headers });
   }
 
   addExpense(payload: AddExpenseRequest): Observable<AddExpenseResponse> {

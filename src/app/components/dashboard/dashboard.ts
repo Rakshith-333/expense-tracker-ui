@@ -12,6 +12,7 @@ import {
   DashboardData,
   DashboardResponse,
   RecentExpense,
+  TopCategory,
 } from '../../core/models/dashboard-response';
 
 const CATEGORY_STYLES: Record<string, { color: string; icon: string }> = {
@@ -45,6 +46,12 @@ export class Dashboard implements OnInit {
     icon: string;
     iconClass: string;
     cardClass: string;
+  }> = [];
+
+  budgetInsights: Array<{
+    label: string;
+    value: string;
+    helper: string;
   }> = [];
 
   categorySummary: CategorySummary[] = [];
@@ -128,44 +135,87 @@ export class Dashboard implements OnInit {
   }
 
   private applyDashboardData(dashboard: DashboardData): void {
+    const summary = dashboard.summary ?? ({} as DashboardData['summary']);
+    const monthlyBudget = summary.monthlyBudget ?? 0;
+    const totalSpent = summary.totalSpent ?? summary.totalThisMonth?.amount ?? 0;
+    const remainingBalance = summary.remainingBalance ?? Math.max(monthlyBudget - totalSpent, 0);
+    const budgetUtilization = summary.budgetUtilization ?? summary.totalThisMonth?.percentage ?? 0;
+    const budgetStatus = summary.budgetStatus ?? 'Good';
+    const remainingDays = summary.remainingDays ?? 30;
+    const dailyLimit = summary.dailyLimit ?? 0;
+    const forecastStatus = summary.forecast?.status ?? 'Within Budget';
+    const forecastSpend = summary.forecast?.predictedSpend ?? 0;
+    const comparisonDiff = summary.comparison?.difference ?? 0;
+    const comparisonTrend = summary.comparison?.trend ?? 'saved';
+
+    const categoryList = Array.isArray(dashboard.categorySummary)
+      ? dashboard.categorySummary
+      : [];
+
+    const topCategoryList = Array.isArray(dashboard.topCategories)
+      ? dashboard.topCategories
+      : dashboard.topCategories
+        ? [dashboard.topCategories]
+        : [];
+
+    const chartCategories = categoryList.length > 0 ? categoryList : topCategoryList;
+
     this.summaryCards = [
       {
-        title: 'Total This Month',
-        amount: `₹${dashboard.summary.totalThisMonth.amount}`,
-        subtitle: `${dashboard.summary.totalThisMonth.percentage}% ${dashboard.summary.totalThisMonth.trend}`,
+        title: 'Monthly Budget',
+        amount: `₹${monthlyBudget}`,
+        subtitle: `Status: ${budgetStatus}`,
         icon: 'account_balance_wallet',
         iconClass: 'purple-icon',
         cardClass: 'purple-card',
       },
       {
-        title: "Today's Expense",
-        amount: `₹${dashboard.summary.todaysExpenses}`,
-        subtitle: `${dashboard.summary.todaysTransactions} transaction${dashboard.summary.todaysTransactions === 1 ? '' : 's'}`,
+        title: 'Total Spent',
+        amount: `₹${totalSpent}`,
+        subtitle: `${budgetUtilization}% utilization`,
         icon: 'trending_up',
         iconClass: 'green-icon',
         cardClass: 'green-card',
       },
       {
-        title: 'This Week',
-        amount: `₹${dashboard.summary.thisWeeksExpenses.amount}`,
-        subtitle: `${dashboard.summary.thisWeeksExpenses.percentage}% ${dashboard.summary.thisWeeksExpenses.trend}`,
-        icon: 'calendar_month',
+        title: 'Remaining Balance',
+        amount: `₹${remainingBalance}`,
+        subtitle: `${remainingDays} days left`,
+        icon: 'savings',
         iconClass: 'blue-icon',
         cardClass: 'blue-card',
       },
       {
-        title: 'This Month Transactions',
-        amount: `${dashboard.summary.thisMonthsTransactions}`,
-        subtitle: 'Transactions this month',
-        icon: 'pie_chart',
+        title: 'Daily Limit',
+        amount: `₹${dailyLimit}`,
+        subtitle: `Forecast: ${forecastStatus}`,
+        icon: 'calendar_month',
         iconClass: 'orange-icon',
         cardClass: 'orange-card',
       },
     ];
 
-    this.categorySummary = dashboard.categorySummary;
+    this.budgetInsights = [
+      {
+        label: 'Budget Status',
+        value: budgetStatus,
+        helper: `${budgetUtilization}% of budget used`,
+      },
+      {
+        label: 'Forecast',
+        value: `₹${forecastSpend}`,
+        helper: forecastStatus,
+      },
+      {
+        label: 'Comparison',
+        value: `₹${comparisonDiff}`,
+        helper: `${comparisonTrend} vs previous month`,
+      },
+    ];
 
-    this.recentExpenses = dashboard.recentExpenses.map((expense) => {
+    this.categorySummary = chartCategories;
+
+    this.recentExpenses = (dashboard.recentExpenses ?? []).map((expense) => {
       const style = CATEGORY_STYLES[expense.category] ?? DEFAULT_CATEGORY_STYLE;
       return {
         ...expense,
@@ -178,7 +228,7 @@ export class Dashboard implements OnInit {
       };
     });
 
-    this.topCategories = dashboard.categorySummary.map((category) => {
+    this.topCategories = topCategoryList.map((category: TopCategory) => {
       const style = CATEGORY_STYLES[category.category] ?? DEFAULT_CATEGORY_STYLE;
       return {
         name: category.category,
@@ -189,11 +239,11 @@ export class Dashboard implements OnInit {
     });
 
     this.pieChartData = {
-      labels: dashboard.categorySummary.map((item) => item.category),
+      labels: chartCategories.map((item) => item.category),
       datasets: [
         {
-          data: dashboard.categorySummary.map((item) => item.totalAmount),
-          backgroundColor: dashboard.categorySummary.map(
+          data: chartCategories.map((item) => item.totalAmount),
+          backgroundColor: chartCategories.map(
             (item) => (CATEGORY_STYLES[item.category] ?? DEFAULT_CATEGORY_STYLE).color
           ),
           borderWidth: 0,
@@ -202,11 +252,11 @@ export class Dashboard implements OnInit {
     };
 
     this.lineChartData = {
-      labels: dashboard.monthlyTrend.map((trend) => trend.month),
+      labels: (dashboard.monthlyTrend ?? []).map((trend) => trend.month),
       datasets: [
         {
           label: 'Expenses',
-          data: dashboard.monthlyTrend.map((trend) => trend.totalAmount),
+          data: (dashboard.monthlyTrend ?? []).map((trend) => trend.totalAmount),
           borderColor: '#7C3AED',
           backgroundColor: 'rgba(124,58,237,.15)',
           fill: true,
