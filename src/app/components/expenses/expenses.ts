@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 
 import { materialImports } from '../../material';
 import { AuthService } from '../../core/services/auth.service';
+import { TranslationService } from '../../core/services/translation.service';
 import { Expense, Pagination } from '../../core/models/expense-response';
-
+import { AddExpenseRequest } from '../../core/models/add-expense-request';
 @Component({
   selector: 'app-expenses',
   standalone: true,
@@ -21,6 +22,7 @@ export class Expenses implements OnInit {
 
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+  private readonly translationService = inject(TranslationService);
   private readonly datePipe = inject(DatePipe);
   private readonly cdr = inject(ChangeDetectorRef);
   pages: number[] = [];
@@ -39,7 +41,14 @@ export class Expenses implements OnInit {
   highestExpense = 0;
   highestExpenseDescription = '';
 
+  get t() {
+    return this.translationService;
+  }
+
   ngOnInit(): void {
+    this.translationService.language$.subscribe(() => {
+      this.cdr.detectChanges();
+    });
 
     this.loadExpenses();
 
@@ -175,10 +184,29 @@ export class Expenses implements OnInit {
   }
 
   addExpense() {
-
     this.router.navigate(['/add-expense']);
-
   }
 
+  editExpense(expense: Expense): void {
+    this.router.navigate(['/add-expense'], {
+      queryParams: { id: expense._id },
+    });
+  }
 
+  deleteExpense(expenseId: string): void {
+    const confirmed = confirm('Are you sure you want to delete this expense?');
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.authService.deleteExpense(expenseId).subscribe({
+      next: () => {
+        this.loadExpenses(this.pagination.currentPage);
+      },
+      error: () => {
+        alert('Unable to delete expense. Please try again.');
+      },
+    });
+  }
 }

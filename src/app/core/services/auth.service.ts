@@ -11,7 +11,8 @@ import { DashboardResponse } from '../models/dashboard-response';
 import { AddExpenseRequest } from '../models/add-expense-request';
 import { AddExpenseResponse } from '../models/add-expense-response';
 import { ExpenseResponse } from '../models/expenses-response';
-import { ProfileResponse, UpdateMonthlyBudgetRequest, UpdateMonthlyBudgetResponse } from '../models/profile-response.model';
+import { ProfileResponse, ProfileUser, UpdateMonthlyBudgetRequest, UpdateMonthlyBudgetResponse } from '../models/profile-response.model';
+import { Expense } from '../models/expense-response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -72,6 +73,22 @@ export class AuthService {
     return this.http.get<ProfileResponse>(`${this.baseUrl}${API.PROFILE.GET}`, { headers });
   }
 
+  updateProfile(payload: Partial<ProfileUser>): Observable<{ success: boolean; message: string; user: ProfileUser }> {
+    const token = localStorage.getItem('token');
+    const headersConfig: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(headersConfig);
+
+    return this.http.put<{ success: boolean; message: string; user: ProfileUser }>(`${this.baseUrl}${API.PROFILE.GET}`, payload, { headers });
+  }
+
   updateMonthlyBudget(payload: UpdateMonthlyBudgetRequest): Observable<UpdateMonthlyBudgetResponse> {
     const token = localStorage.getItem('token');
     const headersConfig: Record<string, string> = {
@@ -95,6 +112,57 @@ export class AuthService {
     });
 
     return this.http.post<AddExpenseResponse>(`${this.baseUrl}${API.EXPENSES.ADDEXPENSE}`, payload, { headers })
+  }
+
+  getExpenseById(expenseId: string): Observable<{ success: boolean; message: string; data: Expense }> {
+    const token = localStorage.getItem('token');
+    const headersConfig: Record<string, string> = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(headersConfig);
+
+    return this.http.get<{ success: boolean; message: string; data: Expense }>(`${this.baseUrl}${API.EXPENSES.ADDEXPENSE}/${expenseId}`, { headers });
+  }
+
+  updateExpense(expenseId: string, payload: AddExpenseRequest): Observable<AddExpenseResponse> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+
+    return this.http.put<AddExpenseResponse>(`${this.baseUrl}${API.EXPENSES.ADDEXPENSE}/${expenseId}`, payload, { headers });
+  }
+
+  deleteExpense(expenseId: string): Observable<{ success: boolean; message: string }> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+
+    return this.http.delete<{ success: boolean; message: string }>(`${this.baseUrl}${API.EXPENSES.ADDEXPENSE}/${expenseId}`, { headers });
+  }
+
+  exportReport(format: 'csv' | 'pdf' | 'json' = 'csv') {
+    const token = localStorage.getItem('token');
+    const headersConfig: Record<string, string> = {
+      Accept: 'application/json',
+    };
+
+    if (token) {
+      headersConfig['Authorization'] = `Bearer ${token}`;
+    }
+
+    const headers = new HttpHeaders(headersConfig);
+    return this.http.get(`${this.baseUrl}${API.REPORTS.EXPORT}?format=${format}`, {
+      headers,
+      responseType: 'blob',
+    });
   }
 
   getExpenses(

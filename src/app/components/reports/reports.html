@@ -1,1 +1,38 @@
-<p>reports works!</p>
+<div class="reports-page">
+  <div class="overview">
+    <h2>{{ t.translate('reportsPageTitle') }}</h2>
+    <p>{{ t.translate('reportsPageSubtitle') }}</p>
+  </div>
+
+  <section class="reports-card">
+    <div class="report-option">
+      <div>
+        <h3>{{ t.translate('csvExport') }}</h3>
+        <p>{{ t.translate('csvExportSubtitle') }}</p>
+      </div>
+      <button mat-stroked-button color="primary" (click)="downloadReport('csv')">
+        {{ t.translate('csvButton') }}
+      </button>
+    </div>
+
+    <div class="report-option">
+      <div>
+        <h3>{{ t.translate('pdfExport') }}</h3>
+        <p>{{ t.translate('pdfExportSubtitle') }}</p>
+      </div>
+      <button mat-stroked-button color="primary" (click)="downloadReport('pdf')">
+        {{ t.translate('pdfButton') }}
+      </button>
+    </div>
+
+    <div class="report-option">
+      <div>
+        <h3>{{ t.translate('jsonExport') }}</h3>
+        <p>{{ t.translate('jsonExportSubtitle') }}</p>
+      </div>
+      <button mat-stroked-button color="primary" (click)="downloadReport('json')">
+        {{ t.translate('jsonButton') }}
+      </button>
+    </div>
+  </section>
+</div>

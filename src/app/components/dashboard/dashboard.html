@@ -1,16 +1,16 @@
 <div class="dashboard-page">
 
   <div class="overview">
-    <h2>Overview</h2>
-    <p>Here's what's happening with your expenses</p>
+    <h2>{{ t.translate('overview') }}</h2>
+    <p>{{ t.translate('overviewSubtitle') }}</p>
   </div>
 
   <div *ngIf="isLoading" class="loading-message">
-    Loading dashboard data...
+    {{ t.translate('loading') }}
   </div>
 
   <div *ngIf="hasError" class="error-message">
-    Unable to load dashboard. Please refresh or login again.
+    {{ t.translate('error') }}
   </div>
 
   <section class="summary-section" *ngIf="!isLoading && !hasError">
@@ -37,7 +37,7 @@
 
   <section class="budget-overview-card" *ngIf="!isLoading && !hasError">
     <div class="section-header">
-      <h2>Budget Overview</h2>
+      <h2>{{ t.translate('budgetOverview') }}</h2>
     </div>
 
     <div class="budget-insight-grid">
@@ -53,16 +53,16 @@
 
     <div class="chart-header">
 
-      <h2>Expense by Category</h2>
+      <h2>{{ t.translate('expenseTrend') }}</h2>
 
       <mat-form-field appearance="outline">
 
         <mat-select [(value)]="selectedPeriod">
 
-          <mat-option value="today">Today</mat-option>
-          <mat-option value="week">This Week</mat-option>
-          <mat-option value="month">This Month</mat-option>
-          <mat-option value="year">This Year</mat-option>
+          <mat-option value="today">{{ t.translate('today') }}</mat-option>
+          <mat-option value="week">{{ t.translate('week') }}</mat-option>
+          <mat-option value="month">{{ t.translate('month') }}</mat-option>
+          <mat-option value="year">{{ t.translate('year') }}</mat-option>
 
         </mat-select>
 
@@ -102,11 +102,11 @@
 
     <div class="recent-header">
 
-      <h2>Recent Expenses</h2>
+      <h2>{{ t.translate('recentExpenses') }}</h2>
 
       <button mat-button color="primary">
 
-        View All
+        {{ t.translate('viewAll') }}
 
       </button>
 
@@ -152,16 +152,16 @@
 
     <div class="trend-header">
 
-      <h2>Expense Trend</h2>
+      <h2>{{ t.translate('expenseTrend') }}</h2>
 
       <mat-form-field appearance="outline" class="trend-filter">
 
         <mat-select [(value)]="selectedTrend">
 
-          <mat-option value="today">Today</mat-option>
-          <mat-option value="week">This Week</mat-option>
-          <mat-option value="month">This Month</mat-option>
-          <mat-option value="year">This Year</mat-option>
+          <mat-option value="today">{{ t.translate('today') }}</mat-option>
+          <mat-option value="week">{{ t.translate('week') }}</mat-option>
+          <mat-option value="month">{{ t.translate('month') }}</mat-option>
+          <mat-option value="year">{{ t.translate('year') }}</mat-option>
 
         </mat-select>
 
@@ -182,7 +182,7 @@
 
     <div class="section-header">
 
-      <h2>Top Spending Categories</h2>
+      <h2>{{ t.translate('topSpending') }}</h2>
 
     </div>
 

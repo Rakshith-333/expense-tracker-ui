@@ -11,6 +11,9 @@ export const API ={
         GET: '/profile',
         UPDATE_BUDGET: '/profile/budget'
     },
+    REPORTS: {
+        EXPORT: '/reports/export'
+    },
     EXPENSES: {
         ADDEXPENSE: '/expenses',
         GETEXPENSES: '/expenses'

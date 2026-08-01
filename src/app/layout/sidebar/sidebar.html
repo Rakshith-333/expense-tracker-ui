@@ -10,9 +10,9 @@
 
       <div>
 
-        <h2>Daily Expense</h2>
+        <h2>{{ t.translate('dashboard') }}</h2>
 
-        <span>Tracker</span>
+        <span>{{ t.translate('expenses') }}</span>
 
       </div>
 
@@ -78,7 +78,7 @@
         (click)="closeSidebar()">
 
         <mat-icon>dashboard</mat-icon>
-        Dashboard
+        {{ t.translate('dashboard') }}
 
       </a>
 
@@ -88,7 +88,7 @@
         (click)="closeSidebar()">
 
         <mat-icon>receipt_long</mat-icon>
-        Expenses
+        {{ t.translate('expenses') }}
 
       </a>
 
@@ -98,7 +98,7 @@
         (click)="closeSidebar()">
 
         <mat-icon>add_circle</mat-icon>
-        Add Expense
+        {{ t.translate('addExpense') }}
 
       </a>
 
@@ -117,7 +117,7 @@
         (click)="closeSidebar()">
 
         <mat-icon>analytics</mat-icon>
-        Reports
+        {{ t.translate('reports') }}
 
       </a>
 
@@ -127,7 +127,7 @@
         (click)="closeSidebar()">
 
         <mat-icon>settings</mat-icon>
-        Settings
+        {{ t.translate('settings') }}
 
       </a>
 

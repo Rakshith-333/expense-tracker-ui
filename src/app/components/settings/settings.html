@@ -34,13 +34,13 @@
 
                     <h3>
 
-                        Profile Information
+                        {{ t.translate('profileInfo') }}
 
                     </h3>
 
                     <p>
 
-                        Manage your personal details
+                        {{ t.translate('profileManage') }}
 
                     </p>
 
@@ -51,7 +51,9 @@
             <button
                 mat-stroked-button
                 color="primary"
-                class="edit-btn">
+                class="edit-btn"
+                type="button"
+                (click)="saveProfile()">
 
                 <mat-icon>
 
@@ -59,7 +61,7 @@
 
                 </mat-icon>
 
-                Edit Profile
+                {{ t.translate('editProfile') }}
 
             </button>
 
@@ -73,15 +75,11 @@
 
                 <label>
 
-                    Full Name
+                    {{ t.translate('fullName') }}
 
                 </label>
 
-                <span>
-
-                    {{user?.name}}
-
-                </span>
+                <input matInput [(ngModel)]="user.name" class="setting-input" />
 
             </div>
 
@@ -105,7 +103,7 @@
 
                 <label>
 
-                    Email Address
+                    {{ t.translate('emailAddress') }}
 
                 </label>
 
@@ -137,15 +135,11 @@
 
                 <label>
 
-                    Phone Number
+                    {{ t.translate('phoneNumber') }}
 
                 </label>
 
-                <span>
-
-                    {{user?.mobileNumber || '+91 XXXXX XXXXX'}}
-
-                </span>
+                <input matInput [(ngModel)]="user.mobileNumber" class="setting-input" />
 
             </div>
 
@@ -169,13 +163,13 @@
 
                 <label>
 
-                    Monthly Budget
+                    {{ t.translate('monthlyBudget') }}
 
                 </label>
 
                 <span>
 
-                    Current saved budget: ₹{{ user?.monthlyBudget ?? 0 }}
+                    {{ t.translate('currentSavedBudget') }}: ₹{{ user?.monthlyBudget ?? 0 }}
 
                 </span>
 
@@ -185,7 +179,7 @@
 
                 <mat-form-field appearance="outline" class="small-field">
 
-                    <mat-label>Enter budget</mat-label>
+                    <mat-label>{{ t.translate('enterBudget') }}</mat-label>
 
                     <input matInput type="number" min="0" [(ngModel)]="monthlyBudget" />
 
@@ -193,7 +187,7 @@
 
                 <button mat-stroked-button color="primary" (click)="saveBudget()">
 
-                    Save
+                    {{ t.translate('saveBudget') }}
 
                 </button>
 
@@ -227,9 +221,9 @@
 
                 <div>
 
-                    <h3>Daily Reminder</h3>
+                    <h3>{{ t.translate('dailyReminder') }}</h3>
 
-                    <p>Get reminded daily to track your expenses</p>
+                    <p>{{ t.translate('reminderSubtitle') }}</p>
 
                 </div>
 
@@ -243,9 +237,9 @@
 
             <div>
 
-                <label>Reminder Time</label>
+                <label>{{ t.translate('reminderTime') }}</label>
 
-                <span>Choose the time you want to receive daily reminder</span>
+                <span>{{ t.translate('reminderTimeHint') }}</span>
 
             </div>
 
@@ -277,9 +271,9 @@
 
             <div>
 
-                <label>Reminder Status</label>
+                <label>{{ t.translate('reminderStatus') }}</label>
 
-                <span>Enable or disable daily reminders</span>
+                <span>{{ t.translate('reminderStatusHint') }}</span>
 
             </div>
 
@@ -314,9 +308,9 @@
 
                 <div>
 
-                    <h3>Preferences</h3>
+                    <h3>{{ t.translate('preferences') }}</h3>
 
-                    <p>Customize your app experience</p>
+                    <p>{{ t.translate('preferencesHint') }}</p>
 
                 </div>
 
@@ -330,7 +324,7 @@
 
             <div>
 
-                <label>Default Currency</label>
+                <label>{{ t.translate('defaultCurrency') }}</label>
 
             </div>
 
@@ -362,7 +356,7 @@
 
             <div>
 
-                <label>Date Format</label>
+                <label>{{ t.translate('dateFormat') }}</label>
 
             </div>
 
@@ -400,29 +394,29 @@
 
             <div>
 
-                <label>Theme</label>
+                <label>{{ t.translate('theme') }}</label>
 
             </div>
 
             <mat-form-field appearance="outline" class="small-field">
 
-                <mat-select [(value)]="theme">
+                <mat-select [(ngModel)]="theme">
 
                     <mat-option value="light">
 
-                        Light
+                        {{ t.translate('light') }}
 
                     </mat-option>
 
                     <mat-option value="dark">
 
-                        Dark
+                        {{ t.translate('dark') }}
 
                     </mat-option>
 
                     <mat-option value="system">
 
-                        System Default
+                        {{ t.translate('systemDefault') }}
 
                     </mat-option>
 
@@ -438,29 +432,47 @@
 
             <div>
 
-                <label>Language</label>
+                <label>{{ t.translate('language') }}</label>
 
             </div>
 
             <mat-form-field appearance="outline" class="small-field">
 
-                <mat-select [(value)]="language">
+                <mat-select [(ngModel)]="language">
 
                     <mat-option value="English">
 
-                        English
+                        {{ t.translate('english') }}
 
                     </mat-option>
 
                     <mat-option value="Kannada">
 
-                        Kannada
+                        {{ t.translate('kannada') }}
 
                     </mat-option>
 
                     <mat-option value="Hindi">
 
-                        Hindi
+                        {{ t.translate('hindi') }}
+
+                    </mat-option>
+
+                    <mat-option value="Telugu">
+
+                        {{ t.translate('telugu') }}
+
+                    </mat-option>
+
+                    <mat-option value="Tamil">
+
+                        {{ t.translate('tamil') }}
+
+                    </mat-option>
+
+                    <mat-option value="Malayalam">
+
+                        {{ t.translate('malayalam') }}
 
                     </mat-option>
 
@@ -468,6 +480,16 @@
 
             </mat-form-field>
 
+        </div>
+
+        <div class="setting-item">
+            <div>
+                <label>Preferences Actions</label>
+                <span>{{ t.translate('savePreferencesHint') }}</span>
+            </div>
+            <button mat-stroked-button color="primary" type="button" (click)="savePreferences()">
+                {{ t.translate('savePreferences') }}
+            </button>
         </div>
 
     </div>
@@ -496,9 +518,9 @@
 
                 <div>
 
-                    <h3>Security</h3>
+                    <h3>{{ t.translate('security') }}</h3>
 
-                    <p>Manage your account security</p>
+                    <p>{{ t.translate('securitySubtitle') }}</p>
 
                 </div>
 
@@ -516,13 +538,13 @@
 
                 <label>
 
-                    Change Password
+                    {{ t.translate('changePassword') }}
 
                 </label>
 
                 <span>
 
-                    Update your account password
+                    {{ t.translate('changePasswordHint') }}
 
                 </span>
 
@@ -546,13 +568,13 @@
 
                 <label>
 
-                    Logout from all devices
+                    {{ t.translate('logoutAllDevices') }}
 
                 </label>
 
                 <span>
 
-                    Sign out from all devices except this one
+                    {{ t.translate('logoutAllDevicesHint') }}
 
                 </span>
 
@@ -594,13 +616,13 @@
 
                     <h3>
 
-                        Account
+                        {{ t.translate('account') }}
 
                     </h3>
 
                     <p>
 
-                        Manage your account
+                        {{ t.translate('accountSubtitle') }}
 
                     </p>
 
@@ -620,13 +642,13 @@
 
                 <label>
 
-                    Logout
+                    {{ t.translate('logout') }}
 
                 </label>
 
                 <span>
 
-                    Sign out from your account
+                    {{ t.translate('logoutHint') }}
 
                 </span>
 
@@ -650,13 +672,13 @@
 
                 <label>
 
-                    Delete Account
+                    {{ t.translate('deleteAccount') }}
 
                 </label>
 
                 <span>
 
-                    Permanently delete your account and all data
+                    {{ t.translate('deleteAccountHint') }}
 
                 </span>
 
@@ -682,7 +704,7 @@
 
         <span>
 
-            Version 1.0.0
+            {{ t.translate('version') }}
 
         </span>
 
@@ -694,7 +716,7 @@
 
         <span>
 
-            Made with ❤️ for better financial habits
+            {{ t.translate('madeWithLove') }}
 
         </span>
 

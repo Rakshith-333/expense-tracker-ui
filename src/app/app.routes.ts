@@ -35,7 +35,7 @@ export const routes: Routes = [
         path: 'dashboard',
         component: Dashboard,
         data:{
-        title:'Dashboard'
+        title:'dashboard'
     }
       },
 
@@ -43,7 +43,7 @@ export const routes: Routes = [
         path: 'expenses',
         component: Expenses,
         data:{
-        title:'Expenses'
+        title:'expenses'
     }
       },
 
@@ -51,14 +51,14 @@ export const routes: Routes = [
         path: 'add-expense',
         component: AddExpense,
         data:{
-            title:'Add Expense'
+            title:'addExpense'
         }
       },
       {
         path: 'reports',
         component: Reports,
         data:{
-            title:'Reports'
+            title:'reports'
         }
       },
 
@@ -66,7 +66,7 @@ export const routes: Routes = [
         path: 'settings',
         component: Settings,
         data:{
-        title:'Settings'
+        title:'settings'
         }
       },
 

@@ -2,8 +2,8 @@
 
   <!-- Page Title -->
   <div class="page-header">
-    <h2>Add Expense</h2>
-    <p>Add your daily expense quickly and easily.</p>
+    <h2>{{ t.translate('addExpensePageTitle') }}</h2>
+    <p>{{ t.translate('addExpensePageSubtitle') }}</p>
   </div>
 
   <!-- Expense Card -->
@@ -14,7 +14,7 @@
       <!-- Amount -->
       <div class="form-group">
         <label>
-          Amount <span class="required">*</span>
+          {{ t.translate('amount') }} <span class="required">{{ t.translate('required') }}</span>
         </label>
 
         <mat-form-field appearance="outline">
@@ -23,7 +23,7 @@
           <input
             matInput
             type="number"
-            placeholder="Enter amount"
+            [placeholder]="t.translate('enterAmount')"
             [(ngModel)]="expense.amount">
         </mat-form-field>
       </div>
@@ -31,13 +31,13 @@
       <!-- Category -->
       <div class="form-group">
         <label>
-          Category <span class="required">*</span>
+          {{ t.translate('category') }} <span class="required">{{ t.translate('required') }}</span>
         </label>
 
         <mat-form-field appearance="outline">
 
           <mat-select
-            placeholder="Select Category"
+            [placeholder]="t.translate('selectCategory')"
             [(ngModel)]="expense.category">
 
             <mat-option
@@ -57,7 +57,7 @@
       <div class="form-group">
 
         <label>
-          Date <span class="required">*</span>
+          {{ t.translate('date') }} <span class="required">{{ t.translate('required') }}</span>
         </label>
 
         <mat-form-field appearance="outline">
@@ -83,7 +83,7 @@
 <div class="form-group">
 
   <label>
-    Time <span class="required">*</span>
+    {{ t.translate('time') }} <span class="required">{{ t.translate('required') }}</span>
   </label>
 
   <div class="time-grid">
@@ -93,7 +93,7 @@
     <mat-form-field appearance="outline">
 
       <mat-select
-        placeholder="HH"
+        [placeholder]="t.translate('hour')"
         [(ngModel)]="expense.hour">
 
         <mat-option
@@ -113,7 +113,7 @@
     <mat-form-field appearance="outline">
 
       <mat-select
-        placeholder="MM"
+        [placeholder]="t.translate('minute')"
         [(ngModel)]="expense.minute">
 
         <mat-option
@@ -133,7 +133,7 @@
     <mat-form-field appearance="outline">
 
       <mat-select
-        placeholder="AM/PM"
+        [placeholder]="t.translate('meridian')"
         [(ngModel)]="expense.meridian">
 
         <mat-option
@@ -155,12 +155,12 @@
       <!-- Payment Mode -->
       <div class="form-group">
 
-        <label>Payment Mode</label>
+        <label>{{ t.translate('paymentMode') }}</label>
 
         <mat-form-field appearance="outline">
 
           <mat-select
-            placeholder="Select Payment Mode"
+            [placeholder]="t.translate('selectPaymentMode')"
             [(ngModel)]="expense.paymentMode">
 
             <mat-option
@@ -180,7 +180,7 @@
       <!-- Description -->
       <div class="form-group full-width">
 
-        <label>Description</label>
+        <label>{{ t.translate('description') }}</label>
 
         <mat-form-field appearance="outline">
 
@@ -188,7 +188,7 @@
             matInput
             rows="4"
             maxlength="200"
-            placeholder="Enter description (Optional)"
+            [placeholder]="t.translate('enterDescription')"
             [(ngModel)]="expense.description">
           </textarea>
 
@@ -212,7 +212,7 @@
         class="cancel-btn"
         (click)="cancel()">
 
-        Cancel
+        {{ t.translate('cancel') }}
 
       </button>
 
@@ -223,7 +223,7 @@
         type="button"
         (click)="saveExpense()">
 
-        Save Expense
+        {{ t.translate('saveExpense') }}
 
       </button>
 

@@ -130,7 +130,7 @@
             <div class="card-left">
 
                 <span class="card-title">
-                    Total Expenses
+                    {{ t.translate('totalExpenses') }}
                 </span>
 
                 <h2>
@@ -138,7 +138,7 @@
                 </h2>
 
                 <small>
-                    This Month
+                    {{ t.translate('thisMonth') }}
                 </small>
 
             </div>
@@ -164,7 +164,7 @@
             <div class="card-left">
 
                 <span class="card-title">
-                    Average per Day
+                    {{ t.translate('averagePerDay') }}
                 </span>
 
                 <h2>
@@ -172,7 +172,7 @@
                 </h2>
 
                 <small>
-                    This Month
+                    {{ t.translate('thisMonth') }}
                 </small>
 
             </div>
@@ -199,7 +199,7 @@
             <div class="card-left">
 
                 <span class="card-title">
-                    Total Transactions
+                    {{ t.translate('totalTransactions') }}
                 </span>
 
                 <h2>
@@ -207,7 +207,7 @@
                 </h2>
 
                 <small>
-                    This Month
+                    {{ t.translate('thisMonth') }}
                 </small>
 
             </div>
@@ -234,7 +234,7 @@
             <div class="card-left">
 
                 <span class="card-title">
-                    Highest Expense
+                    {{ t.translate('highestExpense') }}
                 </span>
 
                 <h2>
@@ -269,13 +269,13 @@
 
             <mat-icon matPrefix>search</mat-icon>
 
-            <input matInput placeholder="Search expenses..." />
+            <input matInput [placeholder]="t.translate('searchExpenses')" />
 
         </mat-form-field>
 
         <mat-form-field appearance="outline">
 
-            <mat-select placeholder="Month">
+            <mat-select [placeholder]="t.translate('month')">
 
                 <mat-option>May 2025</mat-option>
 
@@ -285,9 +285,9 @@
 
         <mat-form-field appearance="outline">
 
-            <mat-select placeholder="Category">
+            <mat-select [placeholder]="t.translate('category')">
 
-                <mat-option>All Categories</mat-option>
+                <mat-option>{{ t.translate('allCategories') }}</mat-option>
 
             </mat-select>
 
@@ -297,7 +297,7 @@
 
             <mat-icon>filter_list</mat-icon>
 
-            Filters
+            {{ t.translate('filters') }}
 
         </button>
 
@@ -313,17 +313,17 @@
 
                 <tr>
 
-                    <th>Date</th>
+                    <th>{{ t.translate('date') }}</th>
 
-                    <th>Description</th>
+                    <th>{{ t.translate('description') }}</th>
 
-                    <th>Category</th>
+                    <th>{{ t.translate('category') }}</th>
 
-                    <th>Amount</th>
+                    <th>{{ t.translate('amount') }}</th>
 
-                    <th>Payment</th>
+                    <th>{{ t.translate('payment') }}</th>
 
-                    <th>Actions</th>
+                    <th>{{ t.translate('actions') }}</th>
 
                 </tr>
 
@@ -395,13 +395,13 @@
 
                     <td>
 
-                        <button mat-icon-button color="primary">
+                        <button mat-icon-button color="primary" (click)="editExpense(item)">
 
                             <mat-icon>edit</mat-icon>
 
                         </button>
 
-                        <button mat-icon-button color="warn">
+                        <button mat-icon-button color="warn" (click)="deleteExpense(item._id)">
 
                             <mat-icon>delete</mat-icon>
 
@@ -481,13 +481,13 @@
 
                 <div class="actions">
 
-                    <button mat-icon-button color="primary">
+                    <button mat-icon-button color="primary" (click)="editExpense(item)">
 
                         <mat-icon>edit</mat-icon>
 
                     </button>
 
-                    <button mat-icon-button color="warn">
+                    <button mat-icon-button color="warn" (click)="deleteExpense(item._id)">
 
                         <mat-icon>delete</mat-icon>
 

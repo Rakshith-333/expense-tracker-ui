@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { materialImports } from '../../material';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { TokenService } from '../../core/services/token.service';
 import { ProfileResponse, ProfileUser } from '../../core/models/profile-response.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslationService } from '../../core/services/translation.service';
 
 @Component({
   selector: 'app-settings',
@@ -17,6 +18,8 @@ export class Settings implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly tokenService = inject(TokenService);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly translationService = inject(TranslationService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   user: ProfileUser = {
     name: '',
@@ -30,16 +33,27 @@ export class Settings implements OnInit {
   reminderTime = '08:00 PM';
   currency = 'INR';
   dateFormat = 'DD MMM YYYY';
-  theme = 'light';
-  language = 'English';
+  theme = this.tokenService.getTheme();
+  language = this.tokenService.getLanguage();
+
+  get t() {
+    return this.translationService;
+  }
 
   currencies = ['INR', 'USD', 'EUR'];
   dateFormats = ['DD MMM YYYY', 'DD/MM/YYYY', 'MM/DD/YYYY'];
   themes = ['light', 'dark', 'system'];
-  languages = ['English', 'Kannada', 'Hindi'];
+  languages = ['English', 'Kannada', 'Hindi', 'Telugu', 'Tamil', 'Malayalam'];
 
   ngOnInit(): void {
+    this.translationService.language$.subscribe(() => {
+      this.cdr.detectChanges();
+    });
+
     this.loadProfile();
+    this.applyTheme(this.theme);
+    this.applyLanguage(this.language);
+    this.language = this.translationService.getCurrentLanguage();
   }
 
   private loadProfile(): void {
@@ -51,6 +65,28 @@ export class Settings implements OnInit {
       },
       error: () => {
         this.snackBar.open('Unable to load profile settings', 'Close', {
+          duration: 3000,
+        });
+      },
+    });
+  }
+
+  saveProfile(): void {
+    const payload: Partial<ProfileUser> = {
+      name: this.user.name,
+      mobileNumber: this.user.mobileNumber,
+    };
+
+    this.authService.updateProfile(payload).subscribe({
+      next: (response) => {
+        this.user = response.user;
+        this.tokenService.saveUser(response.user);
+        this.snackBar.open('Profile updated successfully', 'Close', {
+          duration: 2500,
+        });
+      },
+      error: () => {
+        this.snackBar.open('Unable to update profile', 'Close', {
           duration: 3000,
         });
       },
@@ -72,6 +108,37 @@ export class Settings implements OnInit {
         });
       },
     });
+  }
+
+  savePreferences(): void {
+    this.tokenService.saveTheme(this.theme);
+    this.tokenService.saveLanguage(this.language);
+    this.translationService.setLanguage(this.language);
+    this.applyTheme(this.theme);
+    this.applyLanguage(this.language);
+    this.snackBar.open('Preferences saved successfully', 'Close', {
+      duration: 2500,
+    });
+  }
+
+  private applyTheme(theme: string): void {
+    const root = document.body;
+    root.classList.remove('theme-light', 'theme-dark', 'theme-system');
+    root.classList.add(`theme-${theme}`);
+  }
+
+  private applyLanguage(language: string): void {
+    const labels: Record<string, string> = {
+      English: 'English',
+      Kannada: 'ಕನ್ನಡ',
+      Hindi: 'हिन्दी',
+      Telugu: 'తెలుగు',
+      Tamil: 'தமிழ்',
+      Malayalam: 'മലയാളം',
+    };
+
+    document.documentElement.lang = language.toLowerCase();
+    document.documentElement.setAttribute('data-language', labels[language] ?? language);
   }
 
   changePassword(): void {

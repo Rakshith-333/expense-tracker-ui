@@ -7,6 +7,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartType, ChartOptions } from 'chart.js';
 import { AuthService } from '../../core/services/auth.service';
 import { TokenService } from '../../core/services/token.service';
+import { TranslationService } from '../../core/services/translation.service';
 import {
   CategorySummary,
   DashboardData,
@@ -33,6 +34,7 @@ const DEFAULT_CATEGORY_STYLE = { color: '#9CA3AF', icon: 'payments' };
 export class Dashboard implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly tokenService = inject(TokenService);
+  private readonly translationService = inject(TranslationService);
   private readonly router = inject(Router);
   private readonly cdr = inject(ChangeDetectorRef);
 
@@ -47,6 +49,10 @@ export class Dashboard implements OnInit {
     iconClass: string;
     cardClass: string;
   }> = [];
+
+  get t() {
+    return this.translationService;
+  }
 
   budgetInsights: Array<{
     label: string;
@@ -101,7 +107,16 @@ export class Dashboard implements OnInit {
   isLoading = true;
   hasError = false;
 
+  private lastDashboardData: DashboardData | null = null;
+
   ngOnInit(): void {
+    this.translationService.language$.subscribe(() => {
+      if (this.lastDashboardData) {
+        this.applyDashboardData(this.lastDashboardData);
+      }
+      this.cdr.detectChanges();
+    });
+
     this.loadDashboard();
   }
 
@@ -135,6 +150,8 @@ export class Dashboard implements OnInit {
   }
 
   private applyDashboardData(dashboard: DashboardData): void {
+    this.lastDashboardData = dashboard;
+
     const summary = dashboard.summary ?? ({} as DashboardData['summary']);
     const monthlyBudget = summary.monthlyBudget ?? 0;
     const totalSpent = summary.totalSpent ?? summary.totalThisMonth?.amount ?? 0;
@@ -147,6 +164,10 @@ export class Dashboard implements OnInit {
     const forecastSpend = summary.forecast?.predictedSpend ?? 0;
     const comparisonDiff = summary.comparison?.difference ?? 0;
     const comparisonTrend = summary.comparison?.trend ?? 'saved';
+
+    const localizedBudgetStatus = this.translateBudgetStatus(budgetStatus);
+    const localizedForecastStatus = this.translateForecastStatus(forecastStatus);
+    const localizedComparisonTrend = this.translateComparisonTrend(comparisonTrend);
 
     const categoryList = Array.isArray(dashboard.categorySummary)
       ? dashboard.categorySummary
@@ -162,33 +183,33 @@ export class Dashboard implements OnInit {
 
     this.summaryCards = [
       {
-        title: 'Monthly Budget',
+        title: this.translationService.translate('monthlyBudget'),
         amount: `₹${monthlyBudget}`,
-        subtitle: `Status: ${budgetStatus}`,
+        subtitle: `${this.translationService.translate('status')}: ${localizedBudgetStatus}`,
         icon: 'account_balance_wallet',
         iconClass: 'purple-icon',
         cardClass: 'purple-card',
       },
       {
-        title: 'Total Spent',
+        title: this.translationService.translate('topSpending'),
         amount: `₹${totalSpent}`,
-        subtitle: `${budgetUtilization}% utilization`,
+        subtitle: `${budgetUtilization}% ${this.translationService.translate('utilization')}`,
         icon: 'trending_up',
         iconClass: 'green-icon',
         cardClass: 'green-card',
       },
       {
-        title: 'Remaining Balance',
+        title: this.translationService.translate('budgetOverview'),
         amount: `₹${remainingBalance}`,
-        subtitle: `${remainingDays} days left`,
+        subtitle: `${remainingDays} ${this.translationService.translate('daysLeft')}`,
         icon: 'savings',
         iconClass: 'blue-icon',
         cardClass: 'blue-card',
       },
       {
-        title: 'Daily Limit',
+        title: this.translationService.translate('expenseTrend'),
         amount: `₹${dailyLimit}`,
-        subtitle: `Forecast: ${forecastStatus}`,
+        subtitle: `${this.translationService.translate('forecast')}: ${localizedForecastStatus}`,
         icon: 'calendar_month',
         iconClass: 'orange-icon',
         cardClass: 'orange-card',
@@ -197,19 +218,19 @@ export class Dashboard implements OnInit {
 
     this.budgetInsights = [
       {
-        label: 'Budget Status',
-        value: budgetStatus,
-        helper: `${budgetUtilization}% of budget used`,
+        label: this.translationService.translate('budgetOverview'),
+        value: localizedBudgetStatus,
+        helper: `${budgetUtilization}% ${this.translationService.translate('budgetUsed')}`,
       },
       {
-        label: 'Forecast',
+        label: this.translationService.translate('expenseTrend'),
         value: `₹${forecastSpend}`,
-        helper: forecastStatus,
+        helper: localizedForecastStatus,
       },
       {
-        label: 'Comparison',
+        label: this.translationService.translate('comparison') || this.translationService.translate('comparison'),
         value: `₹${comparisonDiff}`,
-        helper: `${comparisonTrend} vs previous month`,
+        helper: `${localizedComparisonTrend} ${this.translationService.translate('vsPreviousMonth')}`,
       },
     ];
 
@@ -265,9 +286,40 @@ export class Dashboard implements OnInit {
       ],
     };
   }
+
+  private translateBudgetStatus(status: string): string {
+    const normalized = status?.toLowerCase() ?? '';
+    if (normalized.includes('warn') || normalized.includes('limit')) {
+      return this.translationService.translate('budgetWarning');
+    }
+
+    if (normalized.includes('exceed') || normalized.includes('overspend')) {
+      return this.translationService.translate('budgetExceeded');
+    }
+
+    return this.translationService.translate('budgetGood');
+  }
+
+  private translateForecastStatus(status: string): string {
+    const normalized = status?.toLowerCase() ?? '';
+    if (normalized.includes('exceed') || normalized.includes('overspend') || normalized.includes('high')) {
+      return this.translationService.translate('forecastLikelyExceeded');
+    }
+
+    return this.translationService.translate('forecastWithinBudget');
+  }
+
+  private translateComparisonTrend(trend: string): string {
+    const normalized = trend?.toLowerCase() ?? '';
+    if (normalized.includes('saved')) {
+      return this.translationService.translate('saved');
+    }
+
+    if (normalized.includes('spent')) {
+      return this.translationService.translate('spent');
+    }
+
+    return this.translationService.translate('same');
+  }
 }
-
-
-
-
 

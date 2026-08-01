@@ -1,8 +1,15 @@
 :host {
   display: block;
-  background: #f7f8fc;
   min-height: 100vh;
   padding: 24px;
+}
+
+:host-context(.theme-dark) {
+  background: #0f172a;
+}
+
+:host-context(.theme-light) {
+  background: #f7f8fc;
 }
 
 * {
@@ -41,6 +48,51 @@
   overflow: hidden;
   border: 1px solid #ebeef5;
   box-shadow: 0 8px 20px rgba(0,0,0,.05);
+}
+
+.theme-dark .settings-card,
+.theme-dark .settings-container,
+.theme-dark .dashboard-header,
+.theme-dark .sidebar,
+.theme-dark .layout-container,
+.theme-dark .main-content {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.theme-dark .settings-card,
+.theme-dark .settings-container,
+.theme-dark .sidebar,
+.theme-dark .dashboard-header {
+  border-color: #1f2937;
+}
+
+.theme-dark .setting-item span,
+.theme-dark .setting-item label,
+.theme-dark .card-header p,
+.theme-dark .card-header h3,
+.theme-dark .header-left h1,
+.theme-dark .user-info,
+.theme-dark .logo span,
+.theme-dark .logo h2,
+.theme-dark nav a {
+  color: #f9fafb;
+}
+
+.theme-dark .setting-item button,
+.theme-dark .setting-item mat-icon,
+.theme-dark .card-icon,
+.theme-dark .mat-mdc-text-field-wrapper {
+  color: #f9fafb;
+}
+
+.setting-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 15px;
+  color: #111827;
 }
 
 /*=========================================
